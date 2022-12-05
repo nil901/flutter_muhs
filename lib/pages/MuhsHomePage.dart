@@ -1,11 +1,14 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/Circular.dart';
 import 'package:flutter_muhs/compontes/DigitalLibrary.dart';
 import 'package:flutter_muhs/compontes/Examination.dart';
 import 'package:flutter_muhs/compontes/GrievanceRedressal.dart';
+import 'package:flutter_muhs/compontes/Manas.dart';
 import 'package:flutter_muhs/compontes/MuhsIeh.dart';
 import 'package:flutter_muhs/compontes/MuhsVision.dart';
 import 'package:flutter_muhs/compontes/StudentActivities.dart';
+import 'package:flutter_muhs/compontes/StudentFaq.dart';
 import 'package:flutter_muhs/compontes/StudentWelfareSchemes.dart';
 import 'package:flutter_muhs/pages/Drawer.dart';
 
@@ -117,8 +120,8 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_vision.png",
                 ),
               ),
-              InkWell( 
-                 onTap: (() {
+              InkWell(
+                onTap: (() {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Muhsleh()),
@@ -155,14 +158,14 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/scheme.png",
                 ),
               ),
-              InkWell( 
-                 onTap: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const GrievanceRedressal()),
                   );
-                 },
+                },
                 child: HomeController(
                   text: "Grievance\nRedressal For\nStudent",
                   images: "assets/images/c_grivance.png",
@@ -172,56 +175,77 @@ class MuhsHomeBody extends StatelessWidget {
                 text: "Anti Ragging",
                 images: "assets/images/Ragging.png",
               ),
-              InkWell( 
-                 onTap: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const Examination()),
                   );
-                 },
+                },
                 child: HomeController(
                   text: "Examination",
                   images: "assets/images/c_events.png",
                 ),
               ),
-              HomeController(
-                text: "Courses &\n Syllabus",
-                images: "assets/images/c_courses.png",
-              ),
-              HomeController(
-                text: "Circular",
-                images: "assets/images/c_news.png",
-              ),
               InkWell( 
-                 onTap: () {
+                onTap: () {
+                  
+                },
+                child: HomeController(
+                  text: "Courses &\n Syllabus",
+                  images: "assets/images/c_courses.png",
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Circular()),
+                  );
+                },
+                child: HomeController(
+                  text: "Circular",
+                  images: "assets/images/c_news.png",
+                ),
+              ),
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const Notifications()),
                   );
-                 },
+                },
                 child: HomeController(
                   text: "Notifications",
                   images: "assets/images/c_notification.png",
                 ),
               ),
-              InkWell( 
+              InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const DigitalLibrary()),
                   );
-                 },
+                },
                 child: HomeController(
                   text: "Digital Library",
                   images: "assets/images/c_library.png",
                 ),
               ),
-              HomeController(
-                text: "Student FAQ",
-                images: "assets/images/c_registratiion.png",
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const StudentFaq()),
+                  );
+                },
+                child: HomeController(
+                  text: "Student FAQ",
+                  images: "assets/images/c_registratiion.png",
+                ),
               ),
               HomeController(
                 text: "College\nInformation",
@@ -235,9 +259,17 @@ class MuhsHomeBody extends StatelessWidget {
                 text: "University At\n A Glance",
                 images: "assets/images/c_university.png",
               ),
-              HomeController(
-                text: "Manas",
-                images: "assets/images/Manas.png",
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Manas()),
+                  );
+                },
+                child: HomeController(
+                  text: "Manas",
+                  images: "assets/images/Manas.png",
+                ),
               ),
               HomeController(
                 text: "Kulguru Katta",

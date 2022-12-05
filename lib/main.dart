@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
+import 'package:flutter_muhs/widgets/DrawerWidgets/MyAppliedFrom.dart';
+import 'package:flutter_muhs/widgets/DrawerWidgets/MyProfile.dart';
 
 
 void main() {

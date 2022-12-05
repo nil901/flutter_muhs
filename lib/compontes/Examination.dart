@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/examinationurl/ThoreyExamTimeTable.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import 'examinationurl/HallTicket.dart';
+import 'examinationurl/Result.dart';
+import 'examinationurl/ThoreyExamCenterList.dart';
 
 class Examination extends StatelessWidget {
   const Examination({super.key});
@@ -15,37 +20,76 @@ class Examination extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Row(
-                children: [
-                  ExaminationCard(text: "Theory Exam Time Table",), 
-                   ExaminationCard(text: "Theory Exam Centre List \n            (courseWise)",),
-                  
-                ],
+        body: GestureDetector( 
+          
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Row(
+                  children: [
+                    InkWell( 
+                       onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ThoreyExamTimeTable()),
+                  );
+                       }, 
+                      child: ExaminationCard(text: "Theory Exam Time Table",)), 
+                     InkWell(  
+                       onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ThoreyExamCenterList()),
+                  );
+                },
+                      child: ExaminationCard(text: "Theory Exam Centre List \n            (courseWise)",)),
+                    
+                  ],
+                ),
+              ), 
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Row( 
+                  children: [ 
+                     InkWell( 
+                       onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HallTcket()),
+                  );
+                },
+                      child: ExaminationCard(text: "Hall ticket",)),
+                      InkWell( 
+                         onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Result()),
+                  );
+                },
+                        child: ExaminationCard(text: "Result",)),
+                  ],
+                ),
               ),
-            ), 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: Row( 
-                children: [ 
-                   ExaminationCard(text: "Hall ticket",),
-                    ExaminationCard(text: "Result",),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              child: Row( 
-                children: [ 
-                   ExaminationCard(text: "Practical Exam TimeTable",),
-                  
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: Row( 
+                  children: [ 
+                     InkWell(  
+                        onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Result()),
+                  );
+                },
+                      
+                      child: ExaminationCard(text: "Practical Exam TimeTable",)),
+                    
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
         );
   }
