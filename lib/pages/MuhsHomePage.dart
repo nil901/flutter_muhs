@@ -10,12 +10,16 @@ import 'package:flutter_muhs/compontes/MuhsVision.dart';
 import 'package:flutter_muhs/compontes/StudentActivities.dart';
 import 'package:flutter_muhs/compontes/StudentFaq.dart';
 import 'package:flutter_muhs/compontes/StudentWelfareSchemes.dart';
+import 'package:flutter_muhs/compontes/UniversityAtAGlance.dart';
+import 'package:flutter_muhs/compontes/examinationurl/CollageInfo/CollageInformation.dart';
+import 'package:flutter_muhs/compontes/examinationurl/CollageInfo/WorkshopAndConference.dart';
 import 'package:flutter_muhs/pages/Drawer.dart';
 
 import 'package:flutter_muhs/pages/demo.dart';
 
 import 'package:hexcolor/hexcolor.dart';
 
+import '../compontes/CoursesAndSyllabus.dart';
 import '../compontes/Notification.dart';
 
 class MuhsHomePage extends StatelessWidget {
@@ -192,9 +196,19 @@ class MuhsHomeBody extends StatelessWidget {
                 onTap: () {
                   
                 },
-                child: HomeController(
-                  text: "Courses &\n Syllabus",
-                  images: "assets/images/c_courses.png",
+                child: InkWell(  
+                   onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CoursesAndSyllabus()),
+                  );
+                },
+                  
+                  child: HomeController(
+                    text: "Courses &\n Syllabus",
+                    images: "assets/images/c_courses.png",
+                  ),
                 ),
               ),
               InkWell(
@@ -247,17 +261,41 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_registratiion.png",
                 ),
               ),
-              HomeController(
-                text: "College\nInformation",
-                images: "assets/images/c_university.png",
+              InkWell(
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CollageInformation()),
+                  );
+                },
+                child: HomeController(
+                  text: "College\nInformation",
+                  images: "assets/images/c_university.png",
+                ),
               ),
-              HomeController(
-                text: "Workshop &\nConference",
-                images: "assets/images/c_workshop.png",
+              InkWell( 
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const WorkshopAndConference()),
+                  );
+                },
+                child: HomeController(
+                  text: "Workshop &\nConference",
+                  images: "assets/images/c_workshop.png",
+                ),
               ),
-              HomeController(
-                text: "University At\n A Glance",
-                images: "assets/images/c_university.png",
+              InkWell( 
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const UniversityAtAGlance()),
+                  );
+                },
+                child: HomeController(
+                  text: "University At\n A Glance",
+                  images: "assets/images/c_university.png",
+                ),
               ),
               InkWell(
                 onTap: () {

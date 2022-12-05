@@ -15,6 +15,7 @@ class GrievanceRedressal extends StatelessWidget {
           title: Text(
             "Grevance Redressal",
             style: TextStyle(fontSize: 22),
+            
           ),
           centerTitle: true,
         ),

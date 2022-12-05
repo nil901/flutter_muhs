@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/DigitalLibraryUrl/Omnicuris.dart';
+import 'package:flutter_muhs/compontes/DigitalLibraryUrl/OpenSourcedigital.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import 'DigitalLibraryUrl/Knimbus.dart';
+import 'DigitalLibraryUrl/MuhsHealth.dart';
+import 'DigitalLibraryUrl/NationalDigitalLabrary.dart';
+import 'DigitalLibraryUrl/Shodhganga.dart';
 
 class DigitalLibrary extends StatelessWidget {
   const DigitalLibrary({super.key});
@@ -21,13 +28,31 @@ class DigitalLibrary extends StatelessWidget {
             padding: const EdgeInsets.all(3.0),
             child: Row(
               children: [
-                DigitalLibrarys(
-                  text: "Knimbus",
-                  images:  "assets/images/sub_kinbus.png",
+                InkWell(
+                   onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Knimbus()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    text: "Knimbus",
+                    images:  "assets/images/sub_kinbus.png",
+                  ),
                 ),
-                DigitalLibrarys(
-                  images: "assets/images/sub_omnicuris.webp",
-                  text: "Omnicuris",
+                InkWell( 
+                    onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Omnicuris()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    images: "assets/images/sub_omnicuris.webp",
+                    text: "Omnicuris",
+                  ),
                 ),
               ],
             ),
@@ -36,13 +61,31 @@ class DigitalLibrary extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
               children: [
-                DigitalLibrarys( 
-                  images:"assets/images/sub_shodh.png" ,
-                  text: "Shodhganga",
+                InkWell( 
+                     onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Shodhganga()),
+                );
+                },
+                  child: DigitalLibrarys( 
+                    images:"assets/images/sub_shodh.png" ,
+                    text: "Shodhganga",
+                  ),
                 ),
-                DigitalLibrarys( 
-                  images:"assets/images/sub_swayam.png" ,
-                  text: "Swayam",
+                InkWell( 
+                    onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Shodhganga()),
+                );
+                },
+                  child: DigitalLibrarys( 
+                    images:"assets/images/sub_swayam.png" ,
+                    text: "Swayam",
+                  ),
                 ),
               ],
             ),
@@ -51,13 +94,32 @@ class DigitalLibrary extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
               children: [
-                DigitalLibrarys(
-                  images: "assets/images/c_library.png" ,
-                  text: "Open Source digital\n            library",
+                InkWell( 
+                  
+                     onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const OpenSourceDigital()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    images: "assets/images/c_library.png" ,
+                    text: "Open Source digital\n            library",
+                  ),
                 ),
-                DigitalLibrarys(
-                  images: "assets/images/sub_nationalhealth.png" ,
-                  text: "National Digital Labrary",
+                InkWell( 
+                      onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NationalDigitalLabrary()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    images: "assets/images/sub_nationalhealth.png" ,
+                    text: "National Digital Labrary",
+                  ),
                 ),
               ],
             ),
@@ -66,13 +128,32 @@ class DigitalLibrary extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
               children: [
-                DigitalLibrarys(
-                  images: "assets/images/sub_educationhealth.png" ,
-                  text: "Education For Health",
+                InkWell(
+                     onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NationalDigitalLabrary()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    images: "assets/images/sub_educationhealth.png" ,
+                    text: "Education For Health",
+                  ),
                 ),
-                DigitalLibrarys(
-                  images: "assets/images/logo.png" ,
-                  text: "MUHS HEALTH\n SCIENCES REVIEW",
+                InkWell( 
+                   
+                     onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MuhsHealth()),
+                );
+                },
+                  child: DigitalLibrarys(
+                    images: "assets/images/logo.png" ,
+                    text: "MUHS HEALTH\n SCIENCES REVIEW",
+                  ),
                 ),
               ],
             ),
