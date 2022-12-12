@@ -39,8 +39,9 @@ dependencies:
   hexcolor: ^3.0.1
   carousel_pro: ^1.0.0
   path: ^1.8.2
-  flutter_webview_plugin: ^0.4.0
+  flutter_webview_plugin: 
   flutter_pdfview: ^1.2.5
+  flutter_cached_pdfview: ^0.4.1
  
   
 
