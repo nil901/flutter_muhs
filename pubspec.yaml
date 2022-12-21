@@ -42,9 +42,15 @@ dependencies:
   flutter_webview_plugin: 
   flutter_pdfview: ^1.2.5
   flutter_cached_pdfview: ^0.4.1
- 
-  
+  image_picker: ^0.8.6
+  get: ^4.6.5
+  modal_progress_hud_nsn: ^0.3.0
+  http: ^0.13.5
+  shared_preferences: ^2.0.15 
+  syncfusion_flutter_pdfviewer: ^20.3.59
+  path_provider_ex: ^1.0.1
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

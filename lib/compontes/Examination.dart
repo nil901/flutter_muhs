@@ -20,105 +20,126 @@ class Examination extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: GestureDetector( 
-          
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Row(
-                  children: [
-                    InkWell( 
-                       onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ThoreyExamTimeTable()),
-                  );
-                       }, 
-                      child: ExaminationCard(text: "Theory Exam Time Table",)), 
-                     InkWell(  
-                       onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ThoreyExamCenterList()),
-                  );
-                },
-                      child: ExaminationCard(text: "Theory Exam Centre List \n            (courseWise)",)),
-                    
-                  ],
-                ),
-              ), 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                child: Row( 
-                  children: [ 
-                     InkWell( 
-                       onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HallTcket()),
-                  );
-                },
-                      child: ExaminationCard(text: "Hall ticket",)),
-                      InkWell( 
-                         onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Result()),
-                  );
-                },
-                        child: ExaminationCard(text: "Result",)),
-                  ],
-                ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 4,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3),
-                child: Row( 
-                  children: [ 
-                     InkWell(  
-                        onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Result()),
-                  );
-                },
-                      
-                      child: ExaminationCard(text: "Practical Exam TimeTable",)),
-                    
-                  ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ThoreyExamTimeTable()),
+                      );
+                    },
+                    child: ExaminationCard(
+                      text: "Theory Exam Time Table",
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ThoreyExamCenterList()),
+                      );
+                    },
+                    child: ExaminationCard(
+                      text:
+                          "Theory Exam Centre List \n            (courseWise)",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HallTcket()),
+                    );
+                  },
+                  child: ExaminationCard(
+                    text: "Theory Exam Time Table",
+                  ),
                 ),
-              )
-            ],
-          ),
-        ),
-        );
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Result()),
+                    );
+                  },
+                  child: ExaminationCard(
+                    text: "Theory Exam Centre List \n            (courseWise)",
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Result()),
+                      );
+                    },
+                    child: ExaminationCard(
+                      text: "Theory Exam Time Table",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }
 
 class ExaminationCard extends StatelessWidget {
   final String text;
   const ExaminationCard({
-    Key? key, required this.text,
+    Key? key,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(1.0),
-          child: Container(
-            height: 130,
-            width: 200,
-            color: HexColor('#074372'),
+        Container(
+          height: 130,
+          width: 176,
+          color: HexColor('#074372'),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    "assets/images/c_university.png",
-                    height: 60,
-                  ),
+                SizedBox(
+                  height: 12,
+                ),
+                Image.asset(
+                  "assets/images/c_university.png",
+                  height: 50,
+                ),
+                SizedBox(
+                  height: 12,
                 ),
                 Text(
                   text,
@@ -131,7 +152,6 @@ class ExaminationCard extends StatelessWidget {
             ),
           ),
         ),
-        
       ],
     );
   }

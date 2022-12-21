@@ -175,9 +175,18 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_grivance.png",
                 ),
               ),
-              HomeController(
-                text: "Anti Ragging",
-                images: "assets/images/Ragging.png",
+              InkWell( 
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GrievanceRedressal()),
+                  );
+                },
+                child: HomeController(
+                  text: "Anti Ragging",
+                  images: "assets/images/Ragging.png",
+                ),
               ),
               InkWell(
                 onTap: () {

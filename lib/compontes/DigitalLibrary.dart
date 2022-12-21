@@ -27,28 +27,28 @@ class DigitalLibrary extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                   onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Knimbus()),
-                );
-                },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Knimbus()),
+                    );
+                  },
                   child: DigitalLibrarys(
                     text: "Knimbus",
-                    images:  "assets/images/sub_kinbus.png",
+                    images: "assets/images/sub_kinbus.png",
                   ),
                 ),
-                InkWell( 
-                    onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Omnicuris()),
-                );
-                },
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Omnicuris()),
+                    );
+                  },
                   child: DigitalLibrarys(
                     images: "assets/images/sub_omnicuris.webp",
                     text: "Omnicuris",
@@ -60,30 +60,31 @@ class DigitalLibrary extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell( 
-                     onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Shodhganga()),
-                );
-                },
-                  child: DigitalLibrarys( 
-                    images:"assets/images/sub_shodh.png" ,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Shodhganga()),
+                    );
+                  },
+                  child: DigitalLibrarys(
+                    images: "assets/images/sub_shodh.png",
                     text: "Shodhganga",
                   ),
                 ),
-                InkWell( 
-                    onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Shodhganga()),
-                );
-                },
-                  child: DigitalLibrarys( 
-                    images:"assets/images/sub_swayam.png" ,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Shodhganga()),
+                    );
+                  },
+                  child: DigitalLibrarys(
+                    images: "assets/images/sub_swayam.png",
                     text: "Swayam",
                   ),
                 ),
@@ -93,65 +94,65 @@ class DigitalLibrary extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell( 
-                  
-                     onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const OpenSourceDigital()),
-                );
-                },
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OpenSourceDigital()),
+                    );
+                  },
                   child: DigitalLibrarys(
-                    images: "assets/images/c_library.png" ,
+                    images: "assets/images/c_library.png",
                     text: "Open Source digital\n            library",
                   ),
                 ),
-                InkWell( 
-                      onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const NationalDigitalLabrary()),
-                );
-                },
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NationalDigitalLabrary()),
+                    );
+                  },
                   child: DigitalLibrarys(
-                    images: "assets/images/sub_nationalhealth.png" ,
+                    images: "assets/images/sub_nationalhealth.png",
                     text: "National Digital Labrary",
                   ),
                 ),
               ],
             ),
           ),
-           Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                     onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const NationalDigitalLabrary()),
-                );
-                },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NationalDigitalLabrary()),
+                    );
+                  },
                   child: DigitalLibrarys(
-                    images: "assets/images/sub_educationhealth.png" ,
+                    images: "assets/images/sub_educationhealth.png",
                     text: "Education For Health",
                   ),
                 ),
-                InkWell( 
-                   
-                     onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const MuhsHealth()),
-                );
-                },
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MuhsHealth()),
+                    );
+                  },
                   child: DigitalLibrarys(
-                    images: "assets/images/logo.png" ,
+                    images: "assets/images/logo.png",
                     text: "MUHS HEALTH\n SCIENCES REVIEW",
                   ),
                 ),
@@ -169,25 +170,27 @@ class DigitalLibrarys extends StatelessWidget {
   final String images;
   const DigitalLibrarys({
     Key? key,
-    required this.text, required this.images,
+    required this.text,
+    required this.images,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
             height: 130,
-            width: 200,
+            width: 175,
             color: HexColor('#074372'),
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                   images,
+                    images,
                     height: 60,
                   ),
                 ),

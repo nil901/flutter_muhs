@@ -1,40 +1,27 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-// import 'package:hexcolor/hexcolor.dart';
+import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';  
+import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:path_provider_ex/path_provider_ex.dart';
 
-// class PdfView extends StatelessWidget {
-//   const PdfView({super.key});
+class PdfView extends StatelessWidget {
+  String name = "";
+  String pathPDF = "";
+  PdfView({required this.pathPDF ,required this.name});
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(  
-//       appBar: AppBar(
-//           backgroundColor: HexColor('#074372'),
-//           title: Text(
-//             "Savitribai Phule Girls scholarship",
-//             style: TextStyle(fontSize: 22),
-//           ),
-//           centerTitle: true,
-//         ),
-
-//       body: PDF(
-//         enableSwipe: true,
-//         //swipeHorizontal: true, 
-        
-//         autoSpacing: false,
-//         pageFling: false,
-//         onError: (error) {
-//           print(error.toString());
-//         },
-//         onPageError: (page, error) {
-//           print('$page: ${error.toString()}');
-//         },
-//         onPageChanged: (int page, int total) {
-//           print('page change: $page/$total');
-//         },
-//       ).fromUrl('https://admin.muhs.wowinfotech.co/Images/Earn while learn.pdf'),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar( 
+         backgroundColor: HexColor('#074372'), 
+         centerTitle: true,
+        title:  Text(name)
+      ),
+      body: SfPdfViewer.network(
+        pathPDF,
+        key: _pdfViewerKey,
+      ),
+    );
+  }
+}

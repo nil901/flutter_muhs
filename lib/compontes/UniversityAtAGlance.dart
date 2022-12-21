@@ -24,6 +24,7 @@ class UniversityAtAGlance extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                     onTap: () {
@@ -33,8 +34,8 @@ class UniversityAtAGlance extends StatelessWidget {
                             builder: (context) => const AboutUniversity()),
                       );
                     },
-                    child: ExaminationCard( 
-                      image:  "assets/images/c_university.png",
+                    child: ExaminationCard(
+                      image: "assets/images/c_university.png",
                       text: "About University",
                     )),
                 InkWell(
@@ -45,8 +46,8 @@ class UniversityAtAGlance extends StatelessWidget {
                             builder: (context) => const MuhsRegionalCenters()),
                       );
                     },
-                    child: ExaminationCard( 
-                      image:  "assets/images/c_university.png",
+                    child: ExaminationCard(
+                      image: "assets/images/c_university.png",
                       text: "MUHS Regional Center",
                     )),
               ],
@@ -55,6 +56,7 @@ class UniversityAtAGlance extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
                     onTap: () {
@@ -64,7 +66,7 @@ class UniversityAtAGlance extends StatelessWidget {
                             builder: (context) => const StatutoryOfficer()),
                       );
                     },
-                    child: ExaminationCard( 
+                    child: ExaminationCard(
                       image: "assets/images/c_satuory.png",
                       text: "Statutory Offcer",
                     )),
@@ -82,7 +84,8 @@ class ExaminationCard extends StatelessWidget {
   final String image;
   const ExaminationCard({
     Key? key,
-    required this.text, required this.image,
+    required this.text,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -91,27 +94,29 @@ class ExaminationCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(1.0),
-          child: Container(
-            height: 130,
-            width: 200,
-            color: HexColor('#074372'),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                   image,
-                    height: 60,
+          child: Expanded(
+            child: Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      image,
+                      height: 60,
+                    ),
                   ),
-                ),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                )
-              ],
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
