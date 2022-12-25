@@ -19,6 +19,7 @@ import 'package:flutter_muhs/pages/demo.dart';
 
 import 'package:hexcolor/hexcolor.dart';
 
+import '../compontes/AntiRagging.dart';
 import '../compontes/CoursesAndSyllabus.dart';
 import '../compontes/Notification.dart';
 
@@ -28,7 +29,7 @@ class MuhsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      persistentFooterButtons: [
+      persistentFooterButtons:[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -116,7 +117,7 @@ class MuhsHomeBody extends StatelessWidget {
                 onTap: (() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MuhsVision()),
+                    MaterialPageRoute(builder: (context) =>  MuhsVision()),
                   );
                 }),
                 child: HomeController(
@@ -180,7 +181,7 @@ class MuhsHomeBody extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const GrievanceRedressal()),
+                        builder: (context) => const AntiRagging()),
                   );
                 },
                 child: HomeController(

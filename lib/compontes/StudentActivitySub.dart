@@ -13,7 +13,8 @@ class StudentActivityPdf extends StatefulWidget {
 }
 
 late Map mapresponse;
- List? listresponse;
+ List? listresponse; 
+ 
 
 class _StudentActivityPdfState extends State<StudentActivityPdf> {
   String stringresponse = "";
@@ -39,7 +40,7 @@ class _StudentActivityPdfState extends State<StudentActivityPdf> {
           "EXTRA3": "",
           "LANG_ID": ""
         }));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 0) {
       setState(() {
         mapresponse = json.decode(response.body);
         listresponse = mapresponse["DATA"];

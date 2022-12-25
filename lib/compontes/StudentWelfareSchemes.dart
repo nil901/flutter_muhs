@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+
 import 'package:hexcolor/hexcolor.dart';
 
 import 'PDF/pdfView.dart';

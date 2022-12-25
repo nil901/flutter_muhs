@@ -218,40 +218,32 @@ class MyProfile extends StatelessWidget {
             hintlabel: "",
           ), 
  SizedBox(height: 30,),
-         InkWell( 
-          onTap: (() {
-             Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const LoginPage()),
-  );
-          }),
-           child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: HexColor('#074372'),
-                      borderRadius: BorderRadius.circular(5)),
+         Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: HexColor('#074372'),
+                    borderRadius: BorderRadius.circular(5)),
+              ),
+            ), 
+           
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  "Register",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
                 ),
-              ), 
-             
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )
-            ],
-                 ),
-         ),
+              ),
+            )
+          ],
+               ),
         SizedBox(height: 50,)
         ], 
         

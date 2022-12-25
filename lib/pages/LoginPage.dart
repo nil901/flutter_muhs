@@ -37,8 +37,9 @@ class _LoginPageState extends State<LoginPage> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("${value!.DATA1!}")));
           //saveData(value!);
-          SharedPreferences prf = await SharedPreferences.getInstance();
-          await prf.setString("login", "value");
+          // SharedPreference
+          //s prf = await SharedPreferences.getInstance();
+          // await prf.setString("login", "value");
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("${value!.DATA!}")));

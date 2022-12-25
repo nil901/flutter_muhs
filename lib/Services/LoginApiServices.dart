@@ -10,7 +10,7 @@ class apiservice {
         body: jsonEncode(param),
         headers: <String, String>{'Content-Type': 'application/json'});
 
-    print('Response status :${responce.statusCode}');
+    print('Response status :${responce.statusCode == 0}');
     print('Response body :${responce.body}');
     final data = jsonDecode(responce.body);
     return LoginApiresponce(

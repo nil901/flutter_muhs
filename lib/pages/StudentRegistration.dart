@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
@@ -19,6 +18,9 @@ class StudentRegistratin extends StatefulWidget {
   State<StudentRegistratin> createState() => _StudentRegistratinState();
 }
 
+late Map mapresponse;
+List? listresponse;
+
 class _StudentRegistratinState extends State<StudentRegistratin> {
   String imagepath = "";
   String base64String = "";
@@ -35,32 +37,38 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
   final enterController = TextEditingController();
   final confemPassworldContoller = TextEditingController();
 
-  apicallLogin2() {
-    final service = apiservicee();
-    service.apicallLogin(
-      <String, dynamic>{
-        "STUDENT_ID": "",
-        "FIRST_NAME": "Arun",
-        "MIDDEL_NAME": "ABC",
-        "LAST_NAME": "patil",
-        "PRN_NUMBER": "prn1234",
-        "PASSWORD": "1234",
-        "COLLAGE_ID": 2,
-        "EMAIL_ID": "TESTING@GMAIL.COM",
-        "MOBILE_NUMBER": "7812452356",
-        "BATCH_YEAR": "2022",
-        "FACULTY": "dENTAL",
-        "DOB": "",
-        "ADDRESS": "Nashik Cidco",
-        "PROFILE_PHOTO": imageData
-      },
-    ).then((value) {
-      if (value?.DATA1 != null) {
-        print("get data>>>>>" + value!.DATA1!);
-      } else {
-        print(value!.DATA!);
-      }
-    });
+  String stringresponse = "";
+  var isLoaded = false;
+  Future apicall() async {
+    http.Response response;
+    response = await http.post(
+        Uri.parse("https://muhsappapi.greemgoldfpc.com/api/Get_Data"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, String>{
+          "START": "",
+          "END": "",
+          "WORD": "PRN01123",
+          "GET_DATA": "Get_Data_PRNNumberWise",
+          "ID1": "",
+          "ID2": "",
+          "ID3": "",
+          "STATUS": "",
+          "START_DATE": "",
+          "END_DATE": "",
+          "EXTRA1": "",
+          "EXTRA2": "",
+          "EXTRA3": "",
+          "LANG_ID": ""
+        }));
+    //print(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
+        mapresponse = json.decode(response.body);
+        listresponse = mapresponse["DATA"];
+        firstNameController.text = listresponse![0]['FIRST_NAME'];
+        isLoaded = true;
+      });
+    }
   }
 
   selectImageFromGallery() async {
@@ -146,7 +154,7 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
                                     children: [
                                       Image.asset(
                                         'assets/images/gallery.png',
-                                        height: 60,
+                                        height: 50,
                                         width: 60,
                                       ),
                                       Text('Gallery'),
@@ -274,6 +282,14 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
               SizedBox(
                 height: 20,
               ),
+              TextFormField(
+                controller: firstNameController,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    apicall();
+                  },
+                  child: Text("Validate PRN")),
               StudentRegisterLabel(
                 textlabel: "First Name *",
               ),
@@ -384,7 +400,7 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
               ),
               InkWell(
                 onTap: (() {
-                  apicallLogin2();
+                  apicall();
                 }),
                 child: Stack(
                   children: [

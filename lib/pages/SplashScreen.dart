@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/Services/SharedPreferences.dart';
+import 'package:flutter_muhs/demo/loginMyPage.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:get/get.dart';
@@ -24,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
             Duration(seconds: 1),
             () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => const MuhsHomePage()),
                 ));
       }else { 
         return  Timer(
             Duration(seconds: 1),
             () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MuhsHomePage()),
+                  MaterialPageRoute(builder: (context) =>  LoginPage()),
                 ));
       }
     }));

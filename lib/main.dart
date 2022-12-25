@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/pages/LoginPage.dart';
+import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
+import 'package:flutter_muhs/pages/StudentRegistration.dart';
 import 'package:get/get.dart';
 import 'demo/demofilelist.dart';
-import 'demo/validationfrom.dart';
+import 'demo/loginMyPage.dart';
+
 
 void main() {
   runApp(const MyApp());

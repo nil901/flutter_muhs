@@ -51,12 +51,12 @@ class ForgetPassworld extends StatelessWidget {
           height: 30,
         ),
         InkWell( 
-          onTap: () {
-              Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const LoginPage()),
-  );
-          },
+  //         onTap: () {
+  //             Navigator.push(
+  //   context,
+  //   MaterialPageRoute(builder: (context) => const LoginPage()),
+  // );
+         // },
           child: Stack(
             children: [
               Padding(
