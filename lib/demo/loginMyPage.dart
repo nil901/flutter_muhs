@@ -60,7 +60,10 @@
 //       // sharedPreferences.getString("Firstname");
 
 //       Navigator.pushReplacement(
-//           context, MaterialPageRoute(builder: (context) => MuhsHomePage()));
+//           context, MaterialPageRoute(builder: (context) => MuhsHomePage())); 
+//           ScaffoldMessenger.of(context)
+//               .showSnackBar(SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+
 
 //       setState(() {
 //         _isLoading = false;
@@ -68,9 +71,11 @@
 //     } else if (jsonResponse['ResponseCode'] == "1") { 
 //          setState(() {
 //         _isLoading = false;
-//       });
-//       print('invalid passworld and mmfm');
-//       //int(response.body);
+//       }); 
+
+//  ScaffoldMessenger.of(context)
+//               .showSnackBar(SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+//    //int(response.body);
 //     }
 //   }
 
@@ -80,16 +85,18 @@
 //       height: 40.0,
 //       padding: EdgeInsets.symmetric(horizontal: 15.0),
 //       margin: EdgeInsets.only(top: 15.0),
-//       child: TextButton(
-//         onPressed: emailController.text == "" || passwordController.text == ""
-//             ? null
-//             : () {
-//                 setState(() {
-//                   _isLoading = false;
-//                 });
-//                 signIn(emailController.text, passwordController.text);
-//               },
-//         child: Text("Sign In", style: TextStyle(color: Colors.white70)),
+//       child: Container(
+//         child: TextButton(
+//           onPressed: emailController.text == "" || passwordController.text == ""
+//               ? null
+//               : () {
+//                   setState(() {
+//                     _isLoading = false;
+//                   });
+//                   signIn(emailController.text, passwordController.text);
+//                 },
+//           child: Text("Sign In", style: TextStyle(color: Colors.white70)),
+//         ),
 //       ),
 //     );
 //   }

@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart' as http;
 
 class ComplaintAndSuggestions extends StatefulWidget {
   const ComplaintAndSuggestions({super.key});
@@ -20,6 +23,10 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
   ];
   String dropdownvalue = 'Complaint';
   final _fromkey = GlobalKey<FormState>();
+  bool _isLoading = false;
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,18 +65,19 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                   decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black, width: 1)), 
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  hintText: 'Enter Your Name',
-                  hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                  border: InputBorder.none,
-                ),
-              ),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Your Name',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -90,18 +98,19 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                   decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black, width: 1)), 
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  hintText: 'Enter Address',
-                  hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                  border: InputBorder.none,
-                ),
-              ),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Address',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -122,18 +131,19 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                   decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black, width: 1)), 
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  hintText: 'Enter 10 Digit Mobile No',
-                  hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                  border: InputBorder.none,
-                ),
-              ),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter 10 Digit Mobile No',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -154,18 +164,19 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                   decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black, width: 1)), 
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  hintText: 'Enter Email Id',
-                  hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                  border: InputBorder.none,
-                ),
-              ),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Email Id',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -192,8 +203,7 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                     padding: const EdgeInsets.symmetric(horizontal: 13),
                     child: DropdownButton<String>(
                       isExpanded: true,
-                      iconSize: 34, 
-                      
+                      iconSize: 34,
                       value: dropdownvalue,
                       items:
                           items.map<DropdownMenuItem<String>>((String value) {
@@ -227,18 +237,19 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                   decoration: BoxDecoration(
                       // color: Colors.blue,
                       borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black, width: 1)), 
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: TextField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                  hintText: 'Enter Your Complaint /Feedback',
-                  hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                  border: InputBorder.none,
-                ),
-              ),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: TextField(
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Your Complaint /Feedback',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -280,25 +291,33 @@ class _ComplaintAndSuggestionsState extends State<ComplaintAndSuggestions> {
                     ),
                   ),
                 ),
-                SizedBox(height: 50,), 
-                Stack( 
-                  children: [ 
+                SizedBox(
+                  height: 50,
+                ),
+                Stack(
+                  children: [
                     Container(
-                  height: 50, 
-                  
-                  decoration: BoxDecoration(
-                     color:  HexColor('#074372'), 
-                    borderRadius: BorderRadius.circular(6)),
-                  
-                ), 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(child: Text("Submit" ,style: TextStyle(color: Colors.white, fontSize: 25 ,fontWeight: FontWeight.bold),)),
-                )
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: HexColor('#074372'),
+                          borderRadius: BorderRadius.circular(6)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                          child: Text(
+                        "Submit",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      )),
+                    )
                   ],
                 ),
-               
-                 SizedBox(height: 50,),
+                SizedBox(
+                  height: 50,
+                ),
               ],
             ),
           ),

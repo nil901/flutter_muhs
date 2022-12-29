@@ -47,7 +47,7 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
         body: jsonEncode(<String, String>{
           "START": "",
           "END": "",
-          "WORD": "PRN01123",
+          "WORD": "",
           "GET_DATA": "Get_Data_PRNNumberWise",
           "ID1": "",
           "ID2": "",
@@ -60,7 +60,7 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
           "EXTRA3": "",
           "LANG_ID": ""
         }));
-    //print(response.body);
+    print(response.body);
     if (response.statusCode == 200) {
       setState(() {
         mapresponse = json.decode(response.body);
@@ -289,7 +289,7 @@ class _StudentRegistratinState extends State<StudentRegistratin> {
                   onPressed: () {
                     apicall();
                   },
-                  child: Text("Validate PRN")),
+                  child: Text("c")),
               StudentRegisterLabel(
                 textlabel: "First Name *",
               ),
@@ -468,7 +468,8 @@ class _studentRegisterfromsState extends State<studentRegisterfroms> {
               border: Border.all(color: HexColor('#074372'), width: 1)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            child: TextFormField( 
+              
               validator: (text) {
                 if (text!.isEmpty) {
                   return 'please add this field';

@@ -1,16 +1,11 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
-
 import 'PDF/pdfView.dart';
-
 class Circular extends StatefulWidget {
   const Circular({super.key});
-
   @override
   State<Circular> createState() => _CircularState();
 }
@@ -107,10 +102,8 @@ class _CircularState extends State<Circular> {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return PdfView(
-                                  name: listresponse![index]["CIRCULAR_TITLE"]
-                                      .toString(),
-                                  pathPDF: listresponse![index]["CIRCULAR_PDF"]
-                                      .toString(),
+                                  name: listresponse![index]["CIRCULAR_TITLE"].toString(),
+                                  pathPDF: listresponse![index]["CIRCULAR_PDF"].toString(),
                                 );
                               }));
                             }),

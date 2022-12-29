@@ -1,13 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/Services/SharedPreferences.dart';
+import 'package:flutter_muhs/demo/WelcomePage.dart';
+import 'package:flutter_muhs/demo/demofilelist.dart';
 import 'package:flutter_muhs/pages/ForgetPasswordPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Services/LoginApiServices.dart';
+import 'package:http/http.dart' as http;
 
-
+final prnController = TextEditingController();
+final passworldController = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,54 +22,82 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> { 
-  
-  final prnController = TextEditingController();
-  final passworldController = TextEditingController();
+bool _isLoading = false;
 
-  apicallLogin() {
-    if (prnController.text.isNotEmpty && passworldController.text.isNotEmpty) {
-      final service = apiservice();
+class _LoginPageState extends State<LoginPage> {
+  signIn(String prn, pass) async {
+    // ignore: unused_local_variable
 
-      service.apicallLogin(
-        <String, String>{
-          "PRN_NUMBER": prnController.text,
-          "PASSWORD": passworldController.text,
-          "STUDENT_ID": ""
-        },
-      ).then((value) async {
-        if (value?.DATA1 != null) {
-          print("get data>>>>>" + value!.DATA1!);
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("${value!.DATA1!}")));
-          //saveData(value!);
-          // SharedPreference
-          //s prf = await SharedPreferences.getInstance();
-          // await prf.setString("login", "value");
-        } else {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("${value!.DATA!}")));
+    Map<String, dynamic> data = {
+      "STUDENT_ID": "",
+      "PRN_NUMBER": prn,
+      "PASSWORD": pass
+    };
+    // var jsonResponse = null;
+    var response = await http.post(
+        Uri.parse("https://muhsappapi.greemgoldfpc.com/api/Login"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data));
+    // print(response.body);
+    var jsonResponse = json.decode(response.body);
 
-          //  print(value!.DATA!);
-        }
+    if (jsonResponse['ResponseCode'] == "0") {
+      print(response.body);
+      var listresponse = jsonResponse["DATA"];
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Id :${listresponse![0]['STUDENT_ID']}"))); 
+
+           ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("PRNNumber :${listresponse![0]['PRN_NUMBER']}")));
+
+      //  print("name is ${listresponse["ResponseCode"]["STUDENT_ID"].toString()}");
+
+      //listresponse![0]['STUDENT_ID'];
+      // SharedPreferences sharedPreferences =
+      //     await SharedPreferences.getInstance();
+      // sharedPreferences.setInt("Firstname", listresponse![0]['STUDENT_ID']);
+      // sharedPreferences.getInt("Firstname");
+      //  print("Login");
+
+      // ignore: use_build_context_synchronously
+      pageRoute( 
+      listresponse![0]['PRN_NUMBER'].toString(), 
+      listresponse![0]['STUDENT_ID'].toString(),
+       listresponse![0]['EMAIL_ID'].toString());
+     
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+
+      setState(() {
+        _isLoading = true;
       });
-    } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("blanck value fount")));
+    } else if (jsonResponse['ResponseCode'] == "1") {
+      setState(() {
+        _isLoading = false;
+      });
+
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
     }
   }
 
-  void saveData(String DATA1) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.setString('apicallLogin', DATA1);
+  @override
+  void initState() {
+    // TODO: implement initState
+    checkLogin();
+    super.initState();
   }
 
-  void readData() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? savevalue = preferences.getString('apicallLogin');
-    if (savevalue != null) {
-      prnController.text = savevalue;
-      passworldController.text = savevalue;
+  void checkLogin() async {
+    SharedPreferences prf = await SharedPreferences.getInstance();
+    String? val = await prf.getString("Login");
+    if (val!.isNotEmpty && val != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => MuhsHomePage()),
+          (route) => false);
     }
   }
 
@@ -108,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
+          // ignore: prefer_const_constructors
           SizedBox(
             height: 5,
           ),
@@ -115,7 +150,6 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Container(
               height: 48,
-              //width: 300,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: Colors.white,
@@ -125,8 +159,11 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextField(
                   controller: prnController,
                   cursorColor: Colors.black,
+
+                  // ignore: prefer_const_constructors
                   decoration: InputDecoration(
                     hintText: 'Enter PRN Number',
+                    // ignore: prefer_const_constructors
                     hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
                     border: InputBorder.none,
                   ),
@@ -134,6 +171,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+          // ignore: prefer_const_constructors
           SizedBox(
             height: 20,
           ),
@@ -184,10 +222,20 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: GestureDetector(
-                  onTap: (() {
-                    apicallLogin();
-                  }),
+                child: InkWell(
+                  onTap:
+                      prnController.text == "" || passworldController.text == ""
+                          ? null
+                          : () {
+                              setState(() {
+                                _isLoading = true;
+                              });
+
+                              signIn(
+                                prnController.text,
+                                passworldController.text,
+                              );
+                            },
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
@@ -214,7 +262,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
                 onTap: (() {
-                  apicallLogin();
+                  // apicallLogin();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -263,5 +311,16 @@ class _LoginPageState extends State<LoginPage> {
         ]),
       ),
     );
+  }
+
+  void pageRoute(String token , prf ,String email ) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("Login", token); 
+    pref.setString("PRN", prf); 
+    pref.setString("email", email); 
+  
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => WelcomePage()),
+          (route) => false);
   }
 }

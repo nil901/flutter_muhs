@@ -4,6 +4,8 @@ import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
 import 'package:get/get.dart';
+import 'demo/MarathiTable.dart';
+import 'demo/Registration.dart';
 import 'demo/demofilelist.dart';
 import 'demo/loginMyPage.dart';
 
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => SplashScreen(),
+        "/": (context) => LoginPage(),
       },
     );
   }

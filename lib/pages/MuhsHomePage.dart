@@ -18,6 +18,8 @@ import 'package:flutter_muhs/pages/Drawer.dart';
 import 'package:flutter_muhs/pages/demo.dart';
 
 import 'package:hexcolor/hexcolor.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../compontes/AntiRagging.dart';
 import '../compontes/CoursesAndSyllabus.dart';
@@ -29,7 +31,7 @@ class MuhsHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      persistentFooterButtons:[
+      persistentFooterButtons: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -70,8 +72,13 @@ class MuhsHomePage extends StatelessWidget {
   }
 }
 
-class MuhsHomeBody extends StatelessWidget {
-  const MuhsHomeBody({super.key});
+class MuhsHomeBody extends StatefulWidget {
+  @override
+  State<MuhsHomeBody> createState() => _MuhsHomeBodyState();
+}
+
+class _MuhsHomeBodyState extends State<MuhsHomeBody> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +124,7 @@ class MuhsHomeBody extends StatelessWidget {
                 onTap: (() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  MuhsVision()),
+                    MaterialPageRoute(builder: (context) => MuhsVision()),
                   );
                 }),
                 child: HomeController(
@@ -176,8 +183,8 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_grivance.png",
                 ),
               ),
-              InkWell( 
-                 onTap: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -202,19 +209,16 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_events.png",
                 ),
               ),
-              InkWell( 
-                onTap: () {
-                  
-                },
-                child: InkWell(  
-                   onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CoursesAndSyllabus()),
-                  );
-                },
-                  
+              InkWell(
+                onTap: () {},
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CoursesAndSyllabus()),
+                    );
+                  },
                   child: HomeController(
                     text: "Courses &\n Syllabus",
                     images: "assets/images/c_courses.png",
@@ -272,10 +276,11 @@ class MuhsHomeBody extends StatelessWidget {
                 ),
               ),
               InkWell(
-                 onTap: () {
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const CollageInformation()),
+                    MaterialPageRoute(
+                        builder: (context) => const CollageInformation()),
                   );
                 },
                 child: HomeController(
@@ -283,11 +288,12 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_university.png",
                 ),
               ),
-              InkWell( 
-                 onTap: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const WorkshopAndConference()),
+                    MaterialPageRoute(
+                        builder: (context) => const WorkshopAndConference()),
                   );
                 },
                 child: HomeController(
@@ -295,11 +301,12 @@ class MuhsHomeBody extends StatelessWidget {
                   images: "assets/images/c_workshop.png",
                 ),
               ),
-              InkWell( 
-                 onTap: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const UniversityAtAGlance()),
+                    MaterialPageRoute(
+                        builder: (context) => const UniversityAtAGlance()),
                   );
                 },
                 child: HomeController(
@@ -333,6 +340,8 @@ class MuhsHomeBody extends StatelessWidget {
       ),
     );
   }
+
+ 
 }
 
 class HomeController extends StatelessWidget {

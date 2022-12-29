@@ -22,39 +22,41 @@ class StudentActivities extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              InkWell(
-                onTap: (() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const StudentActivityPdf()),
-                  );
-                }),
-                child: PdfView(
-                  text: "PRO-RATA",
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                InkWell(
+                  onTap: (() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const StudentActivityPdf()),
+                    );
+                  }),
+                  child: PdfView(
+                    text: "PRO-RATA",
+                  ),
                 ),
-              ),
-              PdfView(
-                text: "CULTURAL",
-              ),
-              PdfView(
-                text: "AVISHKAR",
-              ),
-              PdfView(
-                text: "NSS",
-              ),
-              PdfView(
-                text: "SPORTS",
-              ),
-            ],
-          ),
-        ],
+                PdfView(
+                  text: "CULTURAL",
+                ),
+                PdfView(
+                  text: "AVISHKAR",
+                ),
+                PdfView(
+                  text: "NSS",
+                ),
+                PdfView(
+                  text: "SPORTS",
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
