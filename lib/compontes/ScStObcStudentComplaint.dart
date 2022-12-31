@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/GrievanceRedressal.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,23 +35,23 @@ class _ScStStudentComplaintState extends State<ScStStudentComplaint> {
   final complanintFeedbackController = TextEditingController();
   final complaintRelatedToController = TextEditingController();
   final complaintTypeController = TextEditingController();
-
-  ScStStudentComplaint() async {
+  
+  ScStCStudentComplaint() async {
     // ignore: unused_local_variable
 
     Map<String, dynamic> data = {
-      "STUDENT_ID": token,
-      "PRN_NUMBER": prnnumber,
+      "STUDENT_ID": prnnumber,
+      "PRN_NUMBER": token,
       "COMPLAINT_NAME": complaintNameController.text,
       "COMPLAINT_ADDRESS": complaintAddresssController.text,
-      "COMPLAINT_CATEGORY": "",
+      "COMPLAINT_CATEGORY": dropdownvalue,
       "MOBILE_NO": mobileNoController.text,
       "ADDRESS": addressController.text,
-      "COMPLAINT_DETAILS": "",
-      "EMAIL": email,
-      "COMPLAINT_FEEDBACK": complanintFeedbackController.text,
+      "COMPLAINT_DETAILS": complaintDetailsController.text,
+      "EMAIL": "",
+      "COMPLAINT_FEEDBACK": "",
       "COMPLAINT_RELATED_TO": "",
-      "COMPLAINT_TYPE": dropdownvalue,
+      "COMPLAINT_TYPE": "SC_ST",
       "EXTRA1": "",
       "EXTRA2": "",
       "EXTRA3": "",
@@ -64,10 +67,8 @@ class _ScStStudentComplaintState extends State<ScStStudentComplaint> {
     var jsonResponse = json.decode(response.body);
     print(response.body);
     if (jsonResponse["ResponseCode"] == "0") {
-      print(response.body);
-      print("sucsuss ");
-ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("${jsonResponse["ResponseMessage"]} ${email}")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
       print(response.body);
 //
 
@@ -79,7 +80,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("${jsonResponse["ResponseMessage"]} ${token}")));
+          content: Text("${jsonResponse["ResponseMessage"]} ${prnnumber}")));
     }
   }
 
@@ -95,7 +96,7 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     setState(() {
       token = shef.getString("Login");
       prnnumber = shef.getString("PRN");
-       email = shef.getString("email");
+      email = shef.getString("email");
     });
   }
 
@@ -137,18 +138,19 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         // color: Colors.blue,
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: Colors.black, width: 1)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: TextField(
-                        controller: complaintNameController,
-                        cursorColor: Colors.black,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Your Name',
-                          hintStyle:
-                              TextStyle(color: Colors.black26, fontSize: 16),
-                          border: InputBorder.none,
-                        ),
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      controller: complaintNameController,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(2.0),
+                        hintText: 'Enter Your Name',
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
                       ),
+                      validator: MultiValidator(
+                          [RequiredValidator(errorText: "Required*")]),
                     ),
                   ),
                   SizedBox(
@@ -173,7 +175,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         border: Border.all(color: Colors.black, width: 1)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: TextField(
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: complaintAddresssController,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
@@ -182,6 +185,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               TextStyle(color: Colors.black26, fontSize: 16),
                           border: InputBorder.none,
                         ),
+                        validator: MultiValidator(
+                            [RequiredValidator(errorText: "Required*")]),
                       ),
                     ),
                   ),
@@ -207,15 +212,61 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         border: Border.all(color: Colors.black, width: 1)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: TextField(
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: mobileNoController,
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(2.0),
                           hintText: 'Enter 10 Digit Mobile No',
                           hintStyle:
                               TextStyle(color: Colors.black26, fontSize: 16),
                           border: InputBorder.none,
                         ),
+                        validator: MultiValidator([
+                          RequiredValidator(errorText: "Required *"),
+                        ]),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Email Address",
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                        // color: Colors.blue,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.black, width: 1)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        controller: emailController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(2.0),
+                          hintText: 'Enter Email Id',
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                        validator: MultiValidator([
+                          RequiredValidator(errorText: "Required*"),
+                          EmailValidator(
+                              errorText: "please enter your valid email")
+                        ]),
                       ),
                     ),
                   ),
@@ -242,20 +293,22 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         border: Border.all(color: Colors.black, width: 1)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 13),
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        iconSize: 34,
-                        value: dropdownvalue,
-                        items:
-                            items.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                              value: value, child: Text(value));
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownvalue = newValue ?? '';
-                          });
-                        },
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          iconSize: 34,
+                          value: dropdownvalue,
+                          items:
+                              items.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                                value: value, child: Text(value));
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownvalue = newValue ?? '';
+                            });
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -280,18 +333,20 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: Colors.black, width: 1)),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: TextField(
-                        controller: complanintFeedbackController,
-                        cursorColor: Colors.black,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Your Complaint /Feedback',
-                          hintStyle:
-                              TextStyle(color: Colors.black26, fontSize: 16),
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          controller: complanintFeedbackController,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Your Complaint /Feedback',
+                            hintStyle:
+                                TextStyle(color: Colors.black26, fontSize: 16),
+                            border: InputBorder.none,
+                          ),
+                          validator: MultiValidator(
+                              [RequiredValidator(errorText: "Required*")]),
+                        )),
                   ),
                   SizedBox(
                     height: 40,
@@ -300,7 +355,14 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     children: [
                       InkWell(
                         onTap: (() {
-                          ScStStudentComplaint();
+                          if (_fromkey.currentState!.validate()) {
+                            ScStStudentComplaint();
+                            Get.to(GrievanceRedressal());
+                          } else {
+                            print("not submited");
+                          }
+
+                          //
                         }),
                         child: Container(
                           height: 50,
@@ -327,5 +389,8 @@ ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             )),
       ),
     );
-  }
+  } 
+  
 }
+ 
+ 

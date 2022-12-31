@@ -7,10 +7,12 @@ import 'package:flutter_muhs/demo/demofilelist.dart';
 import 'package:flutter_muhs/pages/ForgetPasswordPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 
 final prnController = TextEditingController();
 final passworldController = TextEditingController();
@@ -23,11 +25,15 @@ class LoginPage extends StatefulWidget {
 }
 
 bool _isLoading = false;
+  final _fromkey = GlobalKey<FormState>();
 
 class _LoginPageState extends State<LoginPage> {
   signIn(String prn, pass) async {
-    // ignore: unused_local_variable
-
+    // showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return Center(child: CircularProgressIndicator());
+    //  });
     Map<String, dynamic> data = {
       "STUDENT_ID": "",
       "PRN_NUMBER": prn,
@@ -45,10 +51,10 @@ class _LoginPageState extends State<LoginPage> {
       print(response.body);
       var listresponse = jsonResponse["DATA"];
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Id :${listresponse![0]['STUDENT_ID']}"))); 
+          SnackBar(content: Text("Id :${listresponse![0]['STUDENT_ID']}")));
 
-           ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("PRNNumber :${listresponse![0]['PRN_NUMBER']}")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("PRNNumber :${listresponse![0]['PRN_NUMBER']}")));
 
       //  print("name is ${listresponse["ResponseCode"]["STUDENT_ID"].toString()}");
 
@@ -60,11 +66,10 @@ class _LoginPageState extends State<LoginPage> {
       //  print("Login");
 
       // ignore: use_build_context_synchronously
-      pageRoute( 
-      listresponse![0]['PRN_NUMBER'].toString(), 
-      listresponse![0]['STUDENT_ID'].toString(),
-       listresponse![0]['EMAIL_ID'].toString());
-     
+      pageRoute(
+          listresponse![0]['PRN_NUMBER'].toString(),
+          listresponse![0]['STUDENT_ID'].toString(),
+          listresponse![0]['EMAIL_ID'].toString());
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -96,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
     String? val = await prf.getString("Login");
     if (val!.isNotEmpty && val != null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => MuhsHomePage()),
+          MaterialPageRoute(builder: (context) => WelcomePage()),
           (route) => false);
     }
   }
@@ -106,221 +111,280 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(children: [
-          SizedBox(
-            height: 150,
-          ),
-          SizedBox(
-            height: 150,
-            width: 140,
-            child: Image.asset(
-              "assets/images/logo.png",
+        child: Form(
+         key: _fromkey,
+          child: Column(children: [
+            SizedBox(
+              height: 150,
+            ),
+            SizedBox(
+              height: 150,
+              width: 140,
+              child: Image.asset(
+                "assets/images/logo.png",
+                height: 20,
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Center(
+              child: Text("STUDENT LOGIN",
+                  style: TextStyle(
+                      color: HexColor('#074372'),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Text(
+                    "PRN NUMBER *",
+                    style: TextStyle(
+                        color: HexColor('#074372'),
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            // ignore: prefer_const_constructors
+            SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                    border: Border.all(color: HexColor('#074372'), width: 1)),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: TextFormField(
+                      controller: prnController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      cursorColor: Colors.black,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(13),
+                      ],
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(2.0),
+                        hintText: 'Enter PRN Number',
+                        // ignore: prefer_const_constructors
+                        hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        if (value!.length < 13) {
+                          return 'a minimum of 13 characters is required';
+                        }
+                        validator:
+                        MultiValidator([
+                          RequiredValidator(errorText: "Required *"),
+                        ]);
+                      }),
+                ),
+              ),
+            ),
+            // ignore: prefer_const_constructors
+            SizedBox(
               height: 20,
             ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Center(
-            child: Text("STUDENT LOGIN",
-                style: TextStyle(
-                    color: HexColor('#074372'),
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              children: [
-                Text(
-                  "PRN NUMBER *",
-                  style: TextStyle(
-                      color: HexColor('#074372'),
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          // ignore: prefer_const_constructors
-          SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Container(
-              height: 48,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                  border: Border.all(color: HexColor('#074372'), width: 1)),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: prnController,
-                  cursorColor: Colors.black,
-
-                  // ignore: prefer_const_constructors
-                  decoration: InputDecoration(
-                    hintText: 'Enter PRN Number',
-                    // ignore: prefer_const_constructors
-                    hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          // ignore: prefer_const_constructors
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              children: [
-                Text(
-                  "PASSWORD*",
-                  style: TextStyle(
-                      color: HexColor('#074372'),
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Container(
-              height: 48,
-              //width: 300,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                  border: Border.all(color: HexColor('#074372'), width: 1)),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: passworldController,
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Password',
-                    hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: InkWell(
-                  onTap:
-                      prnController.text == "" || passworldController.text == ""
-                          ? null
-                          : () {
-                              setState(() {
-                                _isLoading = true;
-                              });
-
-                              signIn(
-                                prnController.text,
-                                passworldController.text,
-                              );
-                            },
-                  child: Container(
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: HexColor('#074372'),
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    "Login",
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  Text(
+                    "PASSWORD*",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
+                        color: HexColor('#074372'),
+                        fontSize: 13,
                         fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Container(
+                height: 48,
+                //width: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                    border: Border.all(color: HexColor('#074372'), width: 1)),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: TextFormField(
+                    
+                   autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: passworldController,
+                    cursorColor: Colors.black,
+                    decoration: InputDecoration(
+                       contentPadding: EdgeInsets.all(2.0),
+                      hintText: 'Enter Password',
+                      hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
+                      border: InputBorder.none,
+                     
+                    ),
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(10),
+                      ],
+                     validator:
+                        MultiValidator([
+                          RequiredValidator(errorText: "Required *"),
+                        ])
                   ),
                 ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: InkWell(
+                    onTap:
+                   
+                        // prnController.text == "" || passworldController.text == ""
+                        //     ? null
+                        //     :
+                         () {
+                           if (_fromkey.currentState!.validate()) {
+                          setState(() {
+                                  _isLoading = true;
+                                });
+        
+                                signIn(
+                                  prnController.text,
+                                  passworldController.text,
+                                );
+                          } else {
+                            print("Not Login");
+                          }
+        
+                               
+                              },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: HexColor('#074372'),
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Center(
+                    child: _isLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 24,
+                              ),
+                              Text(
+                                "Please Wait...",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          )
+                        : Text(
+                            "Login",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
+                          ),
+                  ),
+                )
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                  onTap: (() async {
+                    if (_isLoading) return;
+                    setState(() => true);
+                    await Future.delayed(Duration(seconds: 5));
+                    setState(() => false);
+        
+                    // apicallLogin();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const StudentRegistratin()),
+                    );
+                  }),
+                  child: Text("Don't Have Account Want to Register YouerSelf",
+                      style: TextStyle(
+                          color: HexColor('#074372'),
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold))),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
                 onTap: (() {
-                  // apicallLogin();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const StudentRegistratin()),
+                        builder: (context) => const ForgetPassworld()),
                   );
                 }),
-                child: Text("Don't Have Account Want to Register YouerSelf",
+                child: Text("FORGET PASSWORLD",
                     style: TextStyle(
                         color: HexColor('#074372'),
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold))),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ForgetPassworld()),
-                );
-              }),
-              child: Text("FORGET PASSWORLD",
-                  style: TextStyle(
-                      color: HexColor('#074372'),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold)),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MuhsHomePage()),
-                );
-              }),
-              child: Text("SKIP NOW",
-                  style: TextStyle(
-                      color: HexColor('#074372'),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MuhsHomePage()),
+                  );
+                }),
+                child: Text("SKIP NOW",
+                    style: TextStyle(
+                        color: HexColor('#074372'),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
 
-  void pageRoute(String token , prf ,String email ) async {
+  void pageRoute(String token, prf, String email) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("Login", token); 
-    pref.setString("PRN", prf); 
-    pref.setString("email", email); 
-  
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => WelcomePage()),
-          (route) => false);
+    pref.setString("Login", token);
+    pref.setString("PRN", prf);
+    pref.setString("email", email);
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => MuhsHomePage()),
+        (route) => false);
   }
 }

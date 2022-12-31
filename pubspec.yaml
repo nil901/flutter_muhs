@@ -50,7 +50,9 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^20.3.59
   path_provider_ex: ^1.0.1
   fluttertoast: ^8.1.2
-  form_validation: ^2.1.0+24
+  form_field_validator: ^1.1.0
+
+  
 
   
 dev_dependencies:
