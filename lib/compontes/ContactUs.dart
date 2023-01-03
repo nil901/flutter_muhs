@@ -42,7 +42,7 @@ class ContactUs extends StatelessWidget {
                   height: 210,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      new BoxShadow(
+                      const BoxShadow(
                         color: Color.fromARGB(255, 109, 106, 106),
                         blurRadius: 1.0,
                       ),
@@ -159,7 +159,7 @@ class ContactUs extends StatelessWidget {
                   height: 130,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      new BoxShadow(
+                      const BoxShadow(
                         color: Color.fromARGB(255, 109, 106, 106),
                         blurRadius: 1.0,
                       ),
@@ -227,7 +227,7 @@ class ContactUs extends StatelessWidget {
                   height: 210,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      new BoxShadow(
+                      const BoxShadow(
                         color: Color.fromARGB(255, 109, 106, 106),
                         blurRadius: 1.0,
                       ),
@@ -250,6 +250,7 @@ class ContactUs extends StatelessWidget {
                       SizedBox(
                         height: 2,
                       ),
+                      // ignore: prefer_const_constructors
                       Text(
                         "(OSD to Hon'ble VC",
                         style: TextStyle(
@@ -322,7 +323,7 @@ class ContactUs extends StatelessWidget {
                   height: 130,
                   decoration: BoxDecoration(
                     boxShadow: [
-                      new BoxShadow(
+                      const BoxShadow(
                         color: Color.fromARGB(255, 109, 106, 106),
                         blurRadius: 1.0,
                       ),
@@ -342,6 +343,7 @@ class ContactUs extends StatelessWidget {
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
                       ),
+                      // ignore: prefer_const_constructors
                       SizedBox(
                         height: 15,
                       ),

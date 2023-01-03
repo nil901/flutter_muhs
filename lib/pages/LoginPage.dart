@@ -25,7 +25,7 @@ class LoginPage extends StatefulWidget {
 }
 
 bool _isLoading = false;
-  final _fromkey = GlobalKey<FormState>();
+final _fromkey = GlobalKey<FormState>();
 
 class _LoginPageState extends State<LoginPage> {
   signIn(String prn, pass) async {
@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Form(
-         key: _fromkey,
+          key: _fromkey,
           child: Column(children: [
             SizedBox(
               height: 150,
@@ -175,7 +175,8 @@ class _LoginPageState extends State<LoginPage> {
                         contentPadding: EdgeInsets.all(2.0),
                         hintText: 'Enter PRN Number',
                         // ignore: prefer_const_constructors
-                        hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
+                        hintStyle:
+                            TextStyle(color: Colors.black26, fontSize: 16),
                         border: InputBorder.none,
                       ),
                       validator: (value) {
@@ -220,28 +221,19 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.white,
                     border: Border.all(color: HexColor('#074372'), width: 1)),
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: TextFormField(
-                    
-                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: passworldController,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                       contentPadding: EdgeInsets.all(2.0),
-                      hintText: 'Enter Password',
-                      hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                      border: InputBorder.none,
-                     
-                    ),
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                      ],
-                     validator:
-                        MultiValidator([
-                          RequiredValidator(errorText: "Required *"),
-                        ])
+                child: TextFormField(
+                  controller: passworldController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(2.0),
+                    hintText: 'Enter Password',
+                    hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
+                    border: InputBorder.none,
                   ),
+                  validator: MultiValidator([
+                    RequiredValidator(errorText: "Required *"),
+                  ]),
                 ),
               ),
             ),
@@ -254,26 +246,24 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: InkWell(
                     onTap:
-                   
+
                         // prnController.text == "" || passworldController.text == ""
                         //     ? null
                         //     :
-                         () {
-                           if (_fromkey.currentState!.validate()) {
-                          setState(() {
-                                  _isLoading = true;
-                                });
-        
-                                signIn(
-                                  prnController.text,
-                                  passworldController.text,
-                                );
-                          } else {
-                            print("Not Login");
-                          }
-        
-                               
-                              },
+                        () {
+                      if (_fromkey.currentState!.validate()) {
+                        setState(() {
+                          _isLoading = true;
+                        });
+
+                        signIn(
+                          prnController.text,
+                          passworldController.text,
+                        );
+                      } else {
+                        print(("Not Submited"));
+                      }
+                    },
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(
@@ -300,8 +290,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               Text(
                                 "Please Wait...",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 15),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
                               )
                             ],
                           )
@@ -324,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() => true);
                     await Future.delayed(Duration(seconds: 5));
                     setState(() => false);
-        
+
                     // apicallLogin();
                     Navigator.push(
                       context,
@@ -361,7 +351,8 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: (() {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MuhsHomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => const MuhsHomePage()),
                   );
                 }),
                 child: Text("SKIP NOW",
@@ -384,7 +375,7 @@ class _LoginPageState extends State<LoginPage> {
     pref.setString("email", email);
 
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => MuhsHomePage()),
+        MaterialPageRoute(builder: (context) => WelcomePage()),
         (route) => false);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/compontes/examinationurl/ThoreyExamTimeTable.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import 'examinationurl/HallTicket.dart';
 import 'examinationurl/Result.dart';
 import 'examinationurl/ThoreyExamCenterList.dart';

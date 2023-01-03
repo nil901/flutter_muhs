@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/demo/marathi_Froms.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
 import 'package:get/get.dart';
+import 'compontes/ScholarshipForm/SanjivaniVidhyarthiSurakshaYojna.dart';
+import 'compontes/ScholarshipForm/SvitribaiPhuleGirlsScholarship.dart';
 import 'demo/MarathiTable.dart';
 import 'demo/Registration.dart';
 import 'demo/demofilelist.dart';
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => LoginPage(),
+        "/": (context) =>SanjivaniVidhyarthiSurakshaYojna(),
       },
     );
   }

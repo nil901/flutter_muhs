@@ -51,6 +51,7 @@ dependencies:
   path_provider_ex: ^1.0.1
   fluttertoast: ^8.1.2
   form_field_validator: ^1.1.0
+  file_picker: ^5.2.4
 
   
 
