@@ -1242,13 +1242,13 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
              SizedBox(height: 10,),
                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                 child: Text("१) आजारी / अपघातग्रस्त विद्यार्थ्याची माहिती",style: TextStyle(color: Colors.black, fontSize:17 ,fontWeight: FontWeight.bold),),
+                 child: Text("२) आजाराचा / अपघाताचा प्रकार व कारण",style: TextStyle(color: Colors.black, fontSize:17 ,fontWeight: FontWeight.bold),),
                ),
                 SizedBox(height: 10,),
                 Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "अ) संपुर्ण नाव :",
+                "अ) अपघातात जखमी / अपंगत्व आल्याचे पुर्ण वर्णन :",
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
