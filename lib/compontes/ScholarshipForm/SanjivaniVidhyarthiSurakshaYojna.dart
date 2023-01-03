@@ -1173,7 +1173,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
              SizedBox(height: 10,),
                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                 child: Text("२) आजारी / अपघातग्रस्त विद्यार्थ्याची माहिती",style: TextStyle(color: Colors.black, fontSize:17 ,fontWeight: FontWeight.bold),),
+                 child: Text("१) आजारी / अपघातग्रस्त विद्यार्थ्याची माहिती",style: TextStyle(color: Colors.black, fontSize:17 ,fontWeight: FontWeight.bold),),
                ),
                 SizedBox(height: 10,),
                 Padding(
@@ -1212,6 +1212,43 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "ब) वय :",
+                style: TextStyle(color: Colors.black, fontSize: 15),
+              ),
+            ),
+         SizedBox(height: 5,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 2),
+              child: Center(
+                  child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: HexColor('#074372'),
+                          ),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: TextFormField(
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                            hintText: '',
+                            hintStyle:
+                                TextStyle(color: Colors.black26, fontSize: 16),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ))),
+            ), 
+             SizedBox(height: 10,),
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 16),
+                 child: Text("१) आजारी / अपघातग्रस्त विद्यार्थ्याची माहिती",style: TextStyle(color: Colors.black, fontSize:17 ,fontWeight: FontWeight.bold),),
+               ),
+                SizedBox(height: 10,),
+                Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "अ) संपुर्ण नाव :",
                 style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ),
