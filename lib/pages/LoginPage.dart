@@ -69,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
       pageRoute(
           listresponse![0]['PRN_NUMBER'].toString(),
           listresponse![0]['STUDENT_ID'].toString(),
-          listresponse![0]['EMAIL_ID'].toString());
+          listresponse![0]['EMAIL_ID'].toString(),
+          listresponse![0]['COLLAGE_ID'].toString());
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -368,11 +369,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void pageRoute(String token, prf, String email) async {
+  void pageRoute(String token, prf, String email ,String collageid) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString("Login", token);
     pref.setString("PRN", prf);
     pref.setString("email", email);
+     pref.setString("collageId", collageid);
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => WelcomePage()),

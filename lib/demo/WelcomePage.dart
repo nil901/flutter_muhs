@@ -13,6 +13,7 @@ class _WelcomePageState extends State<WelcomePage> {
   String? token = "";
   String? prnnumber = "";
   String? email = "";
+  String? collageid = "";
   @override
   void initState() {
     getCard();
@@ -25,7 +26,8 @@ class _WelcomePageState extends State<WelcomePage> {
     setState(() {
       token = shef.getString("Login");
       prnnumber = shef.getString("PRN");
-       email = shef.getString("email");
+      email = shef.getString("email");
+   collageid=   shef.getString("collageId");
     });
   }
 
@@ -48,6 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 Text("Your id prn :${prnnumber}"),
                 Text("Your id prn :${email}"),
+                  Text("Your id prn :${collageid}"),
                 ElevatedButton(
                     onPressed: () async {
                       SharedPreferences prf =
