@@ -5,6 +5,7 @@ import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
 import 'package:get/get.dart';
+import 'compontes/ScholarshipForm/EarnWhilelearn.dart';
 import 'compontes/ScholarshipForm/SanjivaniVidhyarthiSurakshaYojna.dart';
 import 'compontes/ScholarshipForm/SvitribaiPhuleGirlsScholarship.dart';
 import 'demo/MarathiTable.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => SanjivaniVidhyarthiSurakshaYojna(),
+        "/": (context) => EarnWhileLearn(),
       },
     );
   }
