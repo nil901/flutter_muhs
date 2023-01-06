@@ -303,6 +303,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
+                // ignore: prefer_const_constructors
                 child: Text(
                   "अ) संपुर्ण नाव :",
                   style: TextStyle(color: Colors.black, fontSize: 15),
@@ -1566,7 +1567,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                           hintText: '',
                           hintStyle:
                               TextStyle(color: Colors.black26, fontSize: 16),
-                          border: InputBorder.none,
+                       
                         ),
                         validator: MultiValidator([
                           RequiredValidator(errorText: "Required *"),
@@ -1953,7 +1954,9 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                                   : Text("$datetimeBackandDevloper"),
                               Icon(Icons.calendar_month),
                             ],
-                          ))),
+                          ),
+                          ),
+                          ),
                 )),
               ),
               SizedBox(
