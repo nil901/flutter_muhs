@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -27,6 +28,7 @@ String base64String = "";
 String imageData = "";
 
 class _RegistrationState extends State<Registration> {
+  final _fromkey = GlobalKey<FormState>();
   final studentIdController = TextEditingController();
   final collageIdconntroller = TextEditingController();
   final prnController = TextEditingController();
@@ -42,6 +44,7 @@ class _RegistrationState extends State<Registration> {
   final enterController = TextEditingController();
   final newpassworld = TextEditingController();
   final confemPassworldContoller = TextEditingController();
+  final _confirmPassController = TextEditingController();
 
   String stringresponse = "";
   var isLoaded = false;
@@ -90,31 +93,19 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
-  selectImageFromGallery() async {
-    XFile? file = await ImagePicker()
-        .pickImage(source: ImageSource.gallery, imageQuality: 10);
-    if (file != null) {
-      File imagefile = File(file.path);
+  File? image;
+  Future PickImageImag(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
 
-      imageData = base64Encode(imagefile.readAsBytesSync());
-      return imageData;
-    } else {
-      return '';
-    }
-  }
-
-  selectImageFromCamera() async {
-    XFile? file = await ImagePicker()
-        .pickImage(source: ImageSource.camera, imageQuality: 10);
-    if (file != null) {
-      imagepath = file.path;
-
-      File imagefile = File(file.path);
-
-      imageData = base64Encode(imagefile.readAsBytesSync());
-      return imageData;
-    } else {
-      return '';
+      if (image == null) return;
+      final imageTemporary = File(image.path);
+      imageData = base64Encode(imageTemporary.readAsBytesSync());
+      print(imageData);
+      setState(() {});
+      this.image = imageTemporary;
+    } on PlatformException catch (e) {
+      print('Failed to pick image $e');
     }
   }
 
@@ -211,7 +202,8 @@ class _RegistrationState extends State<Registration> {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              imageData = await selectImageFromGallery();
+                              imageData =
+                                  await PickImageImag(ImageSource.gallery);
                               print('Image_Path:-');
                               print(imageData);
                               if (imageData != '') {
@@ -242,7 +234,8 @@ class _RegistrationState extends State<Registration> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              imageData = await selectImageFromCamera();
+                              imageData =
+                                  await PickImageImag(ImageSource.camera);
                               print('Image_Path:-');
                               print(imageData);
 
@@ -285,465 +278,488 @@ class _RegistrationState extends State<Registration> {
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 150,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:
-                              Border.all(color: HexColor('#074372'), width: 1),
-                          borderRadius: BorderRadius.circular(100)),
-                    ),
-                    imageData == ''
-                        ? Image.asset(
-                            'assets/images/c_grivance.png',
-                            height: 150,
-                            width: 150,
-                            fit: BoxFit.cover,
-                          )
-                        : Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100)),
-                            child: ShowImage(imageData),
-                          ),
-                    Positioned(
-                      right: 3,
-                      bottom: 1,
-                      child: InkWell(
-                        onTap: (() {
-                          selectImage();
-                          setState(() {});
-                        }),
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: HexColor('#074372'),
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              'assets/images/camera.png',
-                              height: 50,
-                              width: 50,
-                              color: Colors.white,
-                            ),
+          child: Form(
+            key: _fromkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: HexColor('#074372'),
+                        radius: 72.0,
+                        child: CircleAvatar(
+                          radius: 70.0,
+                          child: ClipOval(
+                            child: image != null
+                                ? Image.file(
+                                    image!,
+                                    width: 200,
+                                    height: 200,
+                                    fit: BoxFit.cover,
+                                  )
+                                : null,
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Textlabels(
-                textlable: "PRN No",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextField(
-                      controller: prnController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        hintText: "Enter 13 Digit PRN Number",
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
+                      Positioned(
+                        right: 3,
+                        bottom: 1,
+                        child: InkWell(
+                          onTap: (() {
+                            selectImage();
+                            setState(() {});
+                          }),
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                color: HexColor('#074372'),
+                                borderRadius: BorderRadius.circular(5)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Image.asset(
+                                'assets/images/camera.png',
+                                height: 50,
+                                width: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              InkWell(
-                onTap: (() {
-                  apicall();
-                }),
-                child: Container(
-                  height: 45,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      color: HexColor('#074372'),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                    child: Text(
-                      "Validate PRN",
-                      style: TextStyle(color: Colors.white, fontSize: 13),
-                    ),
-                  ),
+                SizedBox(
+                  height: 50,
                 ),
-              ),
-              Textlabels(
-                textlable: "First Name *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      
-                      enabled: false,
-                      controller: firstNameController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
+                Textlabels(
+                  textlable: "PRN No",
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Middle Name *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: middlenameController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Last Name *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: LastNameController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Date of Birth *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: dateOfBirthController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Email-Id *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: emailIdController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Mobile No *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: mobileNumberController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "collage Name *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: collageNameController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Faculty *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: facultyController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Year *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      enabled: false,
-                      controller: yearController,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Enter Passworld *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextFormField(
-                      controller: newpassworld,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                        //hintText: widget.hintlabel,12
-                        hintStyle:
-                            TextStyle(color: Colors.black26, fontSize: 16),
-                        border: InputBorder.none,
-                      ),
-                      validator: (val) {
-                        if (val!.isNotEmpty) return 'Empty';
-                        return null;
-                      }),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Textlabels(
-                textlable: "Confim Passworld *",
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: HexColor('#074372'), width: 1),
-                      //  color: Colors.red,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: TextField(
-                    //controller: newpassworld,
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                      //hintText: widget.hintlabel,
-                      hintStyle: TextStyle(color: Colors.black26, fontSize: 16),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    Registeracall();
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
                   child: Container(
-                    height: 50,
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextField(
+                        controller: prnController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          hintText: "Enter 13 Digit PRN Number",
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                InkWell(
+                  onTap: (() {
+                    apicall();
+                  }),
+                  child: Container(
+                    height: 45,
+                    width: 100,
                     decoration: BoxDecoration(
                         color: HexColor('#074372'),
                         borderRadius: BorderRadius.circular(5)),
                     child: Center(
                       child: Text(
-                        "Submit",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                        "Validate PRN",
+                        style: TextStyle(color: Colors.white, fontSize: 13),
                       ),
                     ),
                   ),
                 ),
-              )
-            ],
+                Textlabels(
+                  textlable: "First Name *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: firstNameController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Middle Name *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: middlenameController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Last Name *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: LastNameController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Date of Birth *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: dateOfBirthController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Email-Id *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: emailIdController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Mobile No *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: mobileNumberController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "collage Name *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: collageNameController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Faculty *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        enabled: false,
+                        controller: facultyController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Year *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        enabled: false,
+                        controller: yearController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Enter Passworld *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: TextFormField(
+                        controller: newpassworld,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,12
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) return 'Empty';
+                          return null;
+                        }),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Textlabels(
+                  textlable: "Confim Passworld *",
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(color: HexColor('#074372'), width: 1),
+                        //  color: Colors.red,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: TextFormField(
+                        controller: _confirmPassController,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          //hintText: widget.hintlabel,
+                          hintStyle:
+                              TextStyle(color: Colors.black26, fontSize: 16),
+                          border: InputBorder.none,
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) return 'Empty';
+                          if (val != newpassworld.text) return 'Not Match';
+                          return null;
+                        }),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      if (_fromkey.currentState!.validate()) { 
+                       
+                      setState(() {
+                        Registeracall();
+                      });
+                      }
+
+                    
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: HexColor('#074372'),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                        child: Text(
+                          "Submit",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -86,6 +87,7 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
     }
   }
 
+  final _fromkey = GlobalKey<FormState>();
   final collageNameController = TextEditingController();
   final fullNameController = TextEditingController();
   final MobileNumberController = TextEditingController();
@@ -107,7 +109,7 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
 
   dhanvantariYojna() async {
     Map<String, dynamic> data = {
-      "PRN_NUMBER": "BAB0120220038",
+      "PRN_NUMBER": token,
       "TASK": "ADD",
       "COLLAGE_ID": collageId,
       "STUDENT_ID": prnnumber,
@@ -359,13 +361,19 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: collageNameController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26, fontSize: 16),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -397,15 +405,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: fullNameController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -439,15 +453,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: MobileNumberController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -481,15 +501,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: emailIdController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -523,15 +549,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: fullAddressController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -612,15 +644,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: currentClassCourceController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -654,15 +692,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: totalFeesPaidController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -696,15 +740,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: lastyearPercentageController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -907,15 +957,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: ParentsFullNameController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -949,15 +1005,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: ParentsStudentRealtionController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -991,15 +1053,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: parentsMobileNoController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1033,15 +1101,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: parentsOccupationController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1075,15 +1149,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: parentsYearlyIncomeController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1117,15 +1197,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: parentsOccupationController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1159,15 +1245,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: StudentAdharNumberController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1201,15 +1293,21 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: TextFormField(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             controller: EducationLoanSchemeController,
                             cursorColor: Colors.black,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(2.0),
                               hintStyle: TextStyle(
                                   color: Colors.black26,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                               border: InputBorder.none,
                             ),
+                            validator: MultiValidator([
+                              RequiredValidator(errorText: "Required *"),
+                            ]),
                           ),
                         ),
                       ],
@@ -1237,14 +1335,19 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
                     height: 12,
                     width: 70,
                     child: TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: EducationLoanScheamYearController,
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
+                        //pcontentPadding: EdgeInsets.all(2.0),
                         hintStyle: TextStyle(
                             color: Colors.black26,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
+                      validator: MultiValidator([
+                        RequiredValidator(errorText: "Required *"),
+                      ]),
                     ),
                   ),
                   Text(

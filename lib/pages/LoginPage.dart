@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/Services/SharedPreferences.dart';
+import 'package:flutter_muhs/demo/Registration.dart';
 import 'package:flutter_muhs/demo/WelcomePage.dart';
 import 'package:flutter_muhs/demo/demofilelist.dart';
 import 'package:flutter_muhs/pages/ForgetPasswordPage.dart';
@@ -319,7 +320,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const StudentRegistratin()),
+                          builder: (context) => const Registration()),
                     );
                   }),
                   child: Text("Don't Have Account Want to Register YouerSelf",
