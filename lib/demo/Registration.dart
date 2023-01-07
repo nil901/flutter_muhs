@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +75,18 @@ class _RegistrationState extends State<Registration> {
       setState(() {
         mapresponse = json.decode(response.body);
         listresponse = mapresponse["DATA"];
+        if (listresponse![0]['PASSWORD'].length > 0) {
+          Get.to(LoginPage());
+          Fluttertoast.showToast(
+            msg: "Already registered",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 13.0,
+          );
+        }
         firstNameController.text = listresponse![0]['FIRST_NAME'];
         middlenameController.text = listresponse![0]['MIDDEL_NAME'];
         LastNameController.text = listresponse![0]['LAST_NAME'];
@@ -85,6 +98,7 @@ class _RegistrationState extends State<Registration> {
         yearController.text = listresponse![0]['BATCH_YEAR'];
         studentIdController.text = listresponse![0]["STUDENT_ID"].toString();
         collageIdconntroller.text = listresponse![0]["COLLAGE_ID"].toString();
+
         imageData.toString();
 
         // imageData = listresponse![0]["PROFILE_PHOTO"];
@@ -101,7 +115,9 @@ class _RegistrationState extends State<Registration> {
       if (image == null) return;
       final imageTemporary = File(image.path);
       imageData = base64Encode(imageTemporary.readAsBytesSync());
-      print(imageData);
+
+      print( " image path nilesh  " + imageData);
+
       setState(() {});
       this.image = imageTemporary;
     } on PlatformException catch (e) {
@@ -147,7 +163,7 @@ class _RegistrationState extends State<Registration> {
       "FACULTY": facultyController.text,
       "DOB": dateOfBirthController.text,
       "ADDRESS": "",
-      "PROFILE_PHOTO": imageData
+      "PROFILE_PHOTO": imageData.toString()
     };
     // var jsonResponse = null;
     var response = await http.post(
@@ -158,9 +174,19 @@ class _RegistrationState extends State<Registration> {
     var jsonResponse = json.decode(response.body);
     print(response.body);
     if (jsonResponse["ResponseCode"] == "0") {
+    
+      print(data);
       print(response.body);
-      print("sucsuss ");
 
+      Fluttertoast.showToast(
+        msg: "${jsonResponse["ResponseMessage"]}",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black54,
+        textColor: Colors.white,
+        fontSize: 13.0,
+      );
       print(response.body);
 
       // ignore: use_build_context_synchronously
@@ -732,14 +758,11 @@ class _RegistrationState extends State<Registration> {
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
                     onTap: () {
-                      if (_fromkey.currentState!.validate()) { 
-                       
-                      setState(() {
-                        Registeracall();
-                      });
+                      if (_fromkey.currentState!.validate()) {
+                        setState(() {
+                          Registeracall();
+                        });
                       }
-
-                    
                     },
                     child: Container(
                       height: 50,

@@ -7,6 +7,7 @@ import 'package:flutter_muhs/demo/demofilelist.dart';
 import 'package:flutter_muhs/pages/ForgetPasswordPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -73,8 +74,16 @@ class _LoginPageState extends State<LoginPage> {
           listresponse![0]['COLLAGE_ID'].toString());
 
       // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+        Fluttertoast.showToast(
+            msg: "${jsonResponse["ResponseMessage"]}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 13.0,
+          );
+     
 
       setState(() {
         _isLoading = true;
@@ -84,9 +93,15 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
 
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+      Fluttertoast.showToast(
+            msg: "${jsonResponse["ResponseMessage"]}",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 13.0,
+          );
     }
   }
 
