@@ -19,7 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _prefService.readCache("passworld").then(((value) {
+    
+    _prefService.readCache("Login").then(((value) {
       if (value != null) {
         return Timer(
             Duration(seconds: 1),

@@ -154,8 +154,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                             ),
                             if (listresponse![index]["SWT_TITLE"] ==
                                 ("Savitribai Phule Girls scholarship"))
-                              listresponse![index]["SWT_TITLE"] ==
-                                      ("Savitribai Phule Girls scholarship")
+                              listresponse![index]["SWT_TITLE"] == ("Savitribai Phule Girls scholarship")
                                   ? InkWell(
                                       onTap: (() {
                                         Get.to(
@@ -228,7 +227,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                       ),
                                     )
                                   : null!,
-                            if (listresponse![index]["SWT_TITLE"] ==
+                               if (listresponse![index]["SWT_TITLE"] ==
                                 ("Sanjivani Vidhyarthi Suraksha Yojana"))
                               listresponse![index]["SWT_TITLE"] ==
                                       ("Sanjivani Vidhyarthi Suraksha Yojana")
