@@ -23,6 +23,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../compontes/AntiRagging.dart';
 import '../compontes/CoursesAndSyllabus.dart';
+import '../compontes/KulguruKatta/KulguruKatta.dart';
 import '../compontes/Notification.dart';
 
 class MuhsHomePage extends StatelessWidget {
@@ -326,9 +327,17 @@ class _MuhsHomeBodyState extends State<MuhsHomeBody> {
                   images: "assets/images/Manas.png",
                 ),
               ),
-              HomeController(
-                text: "Kulguru Katta",
-                images: "assets/images/c_leaf.png",
+              InkWell( 
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const KulguruKatta()),
+                  );
+                },
+                child: HomeController(
+                  text: "Kulguru Katta",
+                  images: "assets/images/c_leaf.png",
+                ),
               ),
               HomeController(
                 text: "Contact Us",

@@ -120,11 +120,11 @@ class ExaminationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 130,
-          width: 176,
+          height: 150,
+          width: 160,
           color: HexColor('#074372'),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
@@ -154,4 +154,7 @@ class ExaminationCard extends StatelessWidget {
       ],
     );
   }
-}
+} 
+
+
+

@@ -18,12 +18,12 @@ class GrievanceRedressal extends StatelessWidget {
           centerTitle: true,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        
           children: [
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(2.0),

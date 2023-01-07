@@ -1,10 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/ScholarshipForm/DhanvantariForm.dart';
+import 'package:get/get.dart';
 
 import 'package:hexcolor/hexcolor.dart';
+import 'package:path/path.dart';
 
 import 'PDF/pdfView.dart';
+import 'ScholarshipForm/EarnWhilelearn.dart';
+import 'ScholarshipForm/SanjivaniVidhyarthiSurakshaYojna.dart';
+import 'ScholarshipForm/SvitribaiPhuleGirlsScholarship.dart';
 import 'StudentWelfareFrom/SavitribaiPhuleGirlsScolarship.dart';
 import 'package:http/http.dart' as http;
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -22,6 +28,7 @@ List? listresponse;
 
 class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
   String stringresponse = "";
+  String value = "";
   var isLoaded = false;
   Future apicall() async {
     http.Response response;
@@ -53,14 +60,21 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
     }
   }
 
+  void equalOrator() {
+    if (listresponse![0]['SWT_TITLE']
+        .equals("Savitribai Phule Girls scholarship")) ;
+  }
+
   @override
   void initState() {
     apicall();
     super.initState();
   }
 
+  void lisnae() {}
   @override
   Widget build(BuildContext context) {
+    final james;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: HexColor('#074372'),
@@ -111,9 +125,12 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return PdfView( 
-                                        name:listresponse![index]["SWT_TITLE"].toString() ,
-                                        pathPDF: listresponse![index]["SWP_URL"].toString(),);
+                                    return PdfView(
+                                      name: listresponse![index]["SWT_TITLE"]
+                                          .toString(),
+                                      pathPDF: listresponse![index]["SWP_URL"]
+                                          .toString(),
+                                    );
                                     // open viewPDF page on click
                                   }));
                                 },
@@ -135,19 +152,108 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                             SizedBox(
                               height: 9,
                             ),
-                            Container(
-                              height: 23,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: HexColor('#074372'),
-                                  borderRadius: BorderRadius.circular(17)),
-                              child: Center(
-                                  child: Text(
-                                "Apply",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              )),
-                            ),
+                            if (listresponse![index]["SWT_TITLE"] ==
+                                ("Savitribai Phule Girls scholarship"))
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Savitribai Phule Girls scholarship")
+                                  ? InkWell(
+                                      onTap: (() {
+                                        Get.to(
+                                            SvitribaiPhuleGirlsScholarshipForm());
+                                      }),
+                                      child: Container(
+                                        height: 23,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            color: HexColor('#074372'),
+                                            borderRadius:
+                                                BorderRadius.circular(17)),
+                                        child: Center(
+                                            child: Text(
+                                          "Apply",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        )),
+                                      ),
+                                    )
+                                  : null!,
+                            if (listresponse![index]["SWT_TITLE"] ==
+                                ("Earn while learn"))
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Earn while learn")
+                                  ? InkWell(
+                                      onTap: () {
+                                        Get.to(EarnWhileLearn());
+                                      },
+                                      child: Container(
+                                        height: 23,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            color: HexColor('#074372'),
+                                            borderRadius:
+                                                BorderRadius.circular(17)),
+                                        child: Center(
+                                            child: Text(
+                                          "Apply",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        )),
+                                      ),
+                                    )
+                                  : null!,
+                            if (listresponse![index]["SWT_TITLE"] ==
+                                ("Dhanvantari Yojana"))
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Dhanvantari Yojana")
+                                  ? InkWell(
+                                      onTap: (() {
+                                        Get.to(DhanvantariYojna());
+                                      }),
+                                      child: Container(
+                                        height: 23,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            color: HexColor('#074372'),
+                                            borderRadius:
+                                                BorderRadius.circular(17)),
+                                        child: Center(
+                                            child: Text(
+                                          "Apply",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        )),
+                                      ),
+                                    )
+                                  : null!,
+                            if (listresponse![index]["SWT_TITLE"] ==
+                                ("Sanjivani Vidhyarthi Suraksha Yojana"))
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Sanjivani Vidhyarthi Suraksha Yojana")
+                                  ? InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                            SanjivaniVidhyarthiSurakshaYojna());
+                                      },
+                                      child: Container(
+                                        height: 23,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                            color: HexColor('#074372'),
+                                            borderRadius:
+                                                BorderRadius.circular(17)),
+                                        child: Center(
+                                            child: Text(
+                                          "Apply",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        )),
+                                      ),
+                                    )
+                                  : null!,
                           ],
                         )
                       ],
@@ -169,4 +275,3 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
     );
   }
 }
-
