@@ -92,6 +92,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
       ),
       body: Visibility(
         visible: isLoaded,
+        // ignore: sort_child_properties_last
         child: ListView.builder(
           itemBuilder: (context, index) {
             return Column(
@@ -140,7 +141,9 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                   decoration: BoxDecoration(
                                       color: HexColor("#dbdbdb"),
                                       borderRadius: BorderRadius.circular(17)),
+                                  // ignore: prefer_const_constructors
                                   child: Center(
+                                      // ignore: prefer_const_constructors
                                       child: Text(
                                     "View",
                                     style: TextStyle(
@@ -167,7 +170,9 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                             color: HexColor('#074372'),
                                             borderRadius:
                                                 BorderRadius.circular(17)),
+                                        // ignore: prefer_const_constructors
                                         child: Center(
+                                            // ignore: prefer_const_constructors
                                             child: Text(
                                           "Apply",
                                           style: TextStyle(
@@ -192,7 +197,9 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                             color: HexColor('#074372'),
                                             borderRadius:
                                                 BorderRadius.circular(17)),
+                                        // ignore: prefer_const_constructors
                                         child: Center(
+                                            // ignore: prefer_const_constructors
                                             child: Text(
                                           "Apply",
                                           style: TextStyle(
@@ -203,10 +210,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                     )
                                   : null!,
                             if (listresponse![index]["SWT_TITLE"] ==
-                                ("Dhanvantari Yojana"))
-                              listresponse![index]["SWT_TITLE"] ==
-                                      ("Dhanvantari Yojana")
-                                  ? InkWell(
+                                ("Dhanvantari Yojana")) listresponse![index]["SWT_TITLE"] == ("Dhanvantari Yojana") ? InkWell(
                                       onTap: (() {
                                         Get.to(DhanvantariYojna());
                                       }),
@@ -217,7 +221,9 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                             color: HexColor('#074372'),
                                             borderRadius:
                                                 BorderRadius.circular(17)),
+                                        // ignore: prefer_const_constructors
                                         child: Center(
+                                            // ignore: prefer_const_constructors
                                             child: Text(
                                           "Apply",
                                           style: TextStyle(
@@ -243,7 +249,9 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                             color: HexColor('#074372'),
                                             borderRadius:
                                                 BorderRadius.circular(17)),
+                                        // ignore: prefer_const_constructors
                                         child: Center(
+                                            // ignore: prefer_const_constructors
                                             child: Text(
                                           "Apply",
                                           style: TextStyle(

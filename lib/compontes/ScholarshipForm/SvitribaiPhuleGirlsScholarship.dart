@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,9 @@ class SvitribaiPhuleGirlsScholarshipForm extends StatefulWidget {
 
 class _SvitribaiPhuleGirlsScholarshipFormState
     extends State<SvitribaiPhuleGirlsScholarshipForm> {
+  FilePickerResult? result;
+  bool isChecked = false;
+  bool _isLoading = false;
   File? image;
   Future PickImageImag(ImageSource source) async {
     try {
@@ -28,19 +32,80 @@ class _SvitribaiPhuleGirlsScholarshipFormState
     } on PlatformException catch (e) {
       print('Failed to pick image $e');
     }
-  } 
+  }
 
-  Future PdfUpload() async{ 
-FilePickerResult? result = await FilePicker.platform.pickFiles(
-  type: FileType.custom,
-  allowedExtensions: ['jpg', 'pdf', 'doc'],
-);
-  
+  Future PdfUpload() async {
+    result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+  }
 
+  girlsScholarshipFrom() async {
+    Map<String, dynamic> data = {
+      "PRN_NUMBER": "BAB0120220030",
+      "TASK": "  ADD ",
+      "COLLAGE_ID": "1",
+      "STUDENT_ID": "38",
+      "MOBILE_NO": "1233456",
+      "FULL_NAME": "raj",
+      "BIRTH_DATE": "02/05/1998",
+      "BACKWARD_CLASS": "bca",
+      "RECENT_ADDRESS_MOBILE": "nashik",
+      "PERMENT_ADDRESS": "nashik",
+      "PASSPORT_IMAGE": "",
+      "PARENTS_FULL_NAME": "mukund",
+      "REALTION_STUDENT_PARENT": "no",
+      "MOBILE_NO_HOME": "2665646656",
+      "PARENTS_OCCUPATION": "farmer",
+      "OCCUPATION_ADDRESS": "nashik road",
+      "YEARLY_INCOME": "300",
+      "OFFICE_NUMBER": "4652",
+      "REC_PASSOUT_CLASSGRADE": "5",
+      "CURRENT_CLASS": "bca",
+      "CURRENT_CLASS_NAME": "bca",
+      "INROLL_DATE_COURCE": "02/05/2018",
+      "COURCE_PASSOUT_DATE": "02/05/2018",
+      "COLLAGE_NAME": "k.k.w",
+      "COLLAGE_ADDRESS": "sarswati nager",
+      "PRINCIPLE_NAME": "no",
+      "ANY_OTHER_SCHOLERSHIP": "no",
+      "STUDENT_NAME_BANK": "raj",
+      "BANK_BRANCHNAME_ADDRESS": "nashik road",
+      "BACK_ACCOUNT_NUMBER": "64446444",
+      "BANK_IFSC_NUMBER": "012458",
+      "INCOME_CERTIFICATE_PDF": "n",
+      "RESULT_PDF": result.toString(),
+      "ADHARCARD_PDF": "",
+      //  byte[] SR_IMAGE { get; set; }
+    };
+
+    // var jsonResponse = null;
+    var response = await http.post(
+        Uri.parse(
+            "https://muhsappapi.greemgoldfpc.com/api/GirlScholarshipform"),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data));
+    // print(response.body);
+    var jsonResponse = json.decode(response.body);
+    print(data);
+    print(response.body);
+    if (jsonResponse["ResponseCode"] == "0") {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("${jsonResponse["ResponseMessage"]}")));
+      print(response.body);
+      print("Pdf view Path : $result");
+//
+
+      setState(() {
+        _isLoading = true;
+      });
+    } else {
+      print("error");
+    }
   }
 
   @override
-  bool isChecked = false;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -106,10 +171,9 @@ FilePickerResult? result = await FilePicker.platform.pickFiles(
                                 "assets/images/gallary.png",
                                 height: 90,
                               ),
-                            ), 
-                        
-                            InkWell( 
-                              onTap: ()=> PickImageImag(ImageSource.camera),
+                            ),
+                            InkWell(
+                              onTap: () => PickImageImag(ImageSource.camera),
                               child: Image.asset(
                                 "assets/images/c_Camera.png",
                                 height: 45,
@@ -121,13 +185,19 @@ FilePickerResult? result = await FilePicker.platform.pickFiles(
                     });
               },
               child: Container(
-                height: 130,
-                width: 130,
-                decoration: BoxDecoration(
-                    border: Border.all(color: HexColor('#074372'), width: 1),
-                    borderRadius: BorderRadius.circular(8)), 
-                    child:  image != null ? Image.file(image!, width: 120,height: 120,fit: BoxFit.cover,): null
-              ),
+                  height: 130,
+                  width: 130,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: HexColor('#074372'), width: 1),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: image != null
+                      ? Image.file(
+                          image!,
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
+                        )
+                      : null),
             ),
             SizedBox(
               height: 16,
@@ -1226,19 +1296,24 @@ FilePickerResult? result = await FilePicker.platform.pickFiles(
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    color: HexColor('#074372'),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Center(
-                    child: Text(
-                  "Continue",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 23),
-                )),
+              child: InkWell(
+                onTap: () {
+                  girlsScholarshipFrom();
+                },
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: HexColor('#074372'),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                      child: Text(
+                    "Continue",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23),
+                  )),
+                ),
               ),
             ),
             Padding(
@@ -1255,8 +1330,8 @@ FilePickerResult? result = await FilePicker.platform.pickFiles(
                         'Result',
                         style: TextStyle(color: Colors.black, fontSize: 15),
                       ),
-                      InkWell( 
-                        onTap: () =>PdfUpload(),
+                      InkWell(
+                        onTap: () => PdfUpload(),
                         child: Container(
                           height: 40,
                           width: 100,

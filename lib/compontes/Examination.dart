@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/compontes/examinationurl/PracticalExamTimeTable.dart';
 import 'package:flutter_muhs/compontes/examinationurl/ThoreyExamTimeTable.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'examinationurl/HallTicket.dart';
@@ -19,93 +20,216 @@ class Examination extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 4,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {
+        body: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+            children: [
+              InkWell( 
+                  onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ThoreyExamTimeTable()),
                       );
                     },
-                    child: ExaminationCard(
-                      text: "Theory Exam Time Table",
+                child: Container(
+                  height: 150,
+                  width: 160,
+                  color: HexColor('#074372'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Image.asset(
+                          "assets/images/c_university.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          "Theory Exam Time Table",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
+                ),
+              ),
+              InkWell( 
+                  onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ThoreyExamCenterList()),
                       );
                     },
-                    child: ExaminationCard(
-                      text:
+                child: Container(
+                  height: 150,
+                  width: 160,
+                  color: HexColor('#074372'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Image.asset(
+                          "assets/images/c_university.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
                           "Theory Exam Centre List \n            (courseWise)",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HallTcket()),
-                    );
-                  },
-                  child: ExaminationCard(
-                    text: "Theory Exam Time Table",
+              InkWell( 
+                 onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HallTcket()),
+                      );
+                    },
+                child: Container(
+                  height: 150,
+                  width: 160,
+                  color: HexColor('#074372'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Image.asset(
+                          "assets/images/c_university.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          "Hall ticket",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Result()),
-                    );
-                  },
-                  child: ExaminationCard(
-                    text: "Theory Exam Centre List \n            (courseWise)",
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
-              child: Row(
-                children: [
-                  InkWell(
+              ),
+              InkWell(
+                   onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Result()),
+                      );
+                    },
+                child: InkWell( 
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Result()),
+                        MaterialPageRoute(
+                            builder: (context) => const Result()),
                       );
                     },
-                    child: ExaminationCard(
-                      text: "Theory Exam Time Table",
+                  child: Container(
+                    height: 150,
+                    width: 160,
+                    color: HexColor('#074372'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Image.asset(
+                            "assets/images/c_university.png",
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          Text(
+                            "Results",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
+              InkWell(  
+                  onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PraticalExamTimeTable()),
+                      );
+                    },
+                
+                child: Container(
+                  height: 150,
+                  width: 160,
+                  color: HexColor('#074372'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Image.asset(
+                          "assets/images/c_university.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          "Practical Exam TimeTable",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }
@@ -154,7 +278,4 @@ class ExaminationCard extends StatelessWidget {
       ],
     );
   }
-} 
-
-
-
+}

@@ -19,61 +19,109 @@ class UniversityAtAGlance extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AboutUniversity()),
-                      );
-                    },
-                    child: ExaminationCard(
-                      image: "assets/images/c_university.png",
-                      text: "About University",
-                    )),
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MuhsRegionalCenters()),
-                      );
-                    },
-                    child: ExaminationCard(
-                      image: "assets/images/c_university.png",
-                      text: "MUHS Regional Center",
-                    )),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const StatutoryOfficer()),
-                      );
-                    },
-                    child: ExaminationCard(
-                      image: "assets/images/c_satuory.png",
-                      text: "Statutory Offcer",
-                    )),
-              ],
-            ),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: GridView.count( 
+           crossAxisCount: 2, childAspectRatio: 3/2, crossAxisSpacing: 2,  mainAxisSpacing: 2, 
+           children: [ 
+            InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AboutUniversity()),
+                          );
+                        },
+                        child: Container(
+                height: 130,
+                width: 175,
+                color: HexColor('#074372'),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/c_university.png",
+                        height: 60,
+                      ),
+                    ),
+                    Text(
+                      "About University",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ), ), 
+
+              InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MuhsRegionalCenters()),
+                          );
+                        },
+                        child: Container(
+                height: 130,
+                width: 175,
+                color: HexColor('#074372'),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/c_university.png",
+                        height: 60,
+                      ),
+                    ),
+                    Text(
+                      "MUHS Regional Center",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ), ),  
+
+                 InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const StatutoryOfficer()),
+                          );
+                        },
+                        child: Container(
+                height: 130,
+                width: 175,
+                color: HexColor('#074372'),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/images/c_satuory.png",
+                        height: 60,
+                      ),
+                    ),
+                    Text(
+                      "Statutory Offcer",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    )
+                  ],
+                ),
+              ), ), 
+           ],
+          
+        ),
       ),
     );
   }

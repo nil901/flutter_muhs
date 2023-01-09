@@ -17,18 +17,12 @@ class GrievanceRedressal extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Column(
-        
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Row(
-               
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: InkWell(
-                      onTap: (() {
+        body: Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: GridView.count(crossAxisCount: 2, childAspectRatio: 3/2, crossAxisSpacing: 2,
+          children: [ 
+            InkWell( 
+               onTap: (() {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -36,71 +30,67 @@ class GrievanceRedressal extends StatelessWidget {
                                   const ComplaintAndSuggestions()),
                         );
                       }),
-                      child: Expanded(
-                        child: Container(
-                          height: 130,
-                          width: 170,
-                          color: HexColor('#074372'),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  "assets/images/c_university.png",
-                                  height: 60,
+              child: Container( 
+                height: 20, 
+                width: 20, 
+                color:HexColor('#074372'), 
+                child: Column(
+                 children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    "assets/images/c_university.png",
+                                    height: 60,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Complaint and\n Suggestions",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: (() {
+                                Text(
+                                  "Complaint and\n Suggestions",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                )
+                              ],
+                ),
+              ),
+            ),
+             InkWell( 
+               onTap: (() {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const ScStStudentComplaint()),
                       );
                     }),
-                    child: Expanded(
-                      child: Container(
-                        height: 130,
-                        width: 170,
-                        color: HexColor('#074372'),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(
-                                "assets/images/c_university.png",
-                                height: 60,
-                              ),
-                            ),
-                            Text(
-                              "SC/ST/OBC Student\n         Complaint Box",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
+               child: Container( 
+                height: 20, 
+                width: 20, 
+                color:HexColor('#074372'), 
+                child: Column( 
+                  children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    "assets/images/c_university.png",
+                                    height: 60,
+                                  ),
+                                ),
+                                Text(
+                                  "Complaint and\n Suggestions",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                )
+                              ],
+                ),
+                         ),
+             )
           ],
-        ));
+          
+          ),
+        ) 
+           
+        );
   }
 }

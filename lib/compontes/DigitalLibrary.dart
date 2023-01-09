@@ -22,190 +22,271 @@ class DigitalLibrary extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Knimbus()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    text: "Knimbus",
-                    images: "assets/images/sub_kinbus.png",
+      body: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: GridView.count( 
+          crossAxisCount: 2, childAspectRatio: 3/2, crossAxisSpacing: 2,  mainAxisSpacing: 2,
+          children: [ 
+              InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Knimbus()),
+                        );
+                      },
+                      child: Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_kinbus.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Omnicuris()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/sub_omnicuris.webp",
-                    text: "Omnicuris",
+                  Text(
+                    "Knimbus",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),  
+              ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Omnicuris()),
+                        );
+                      },
+                      child:Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_omnicuris.webp",
+                      height: 60,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3),
-            child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Shodhganga()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/sub_shodh.png",
-                    text: "Shodhganga",
+                  Text(
+                    "Omnicuris",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),  
+                    ),
+                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Shodhganga()),
+                        );
+                      },
+                      child:  Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_shodh.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Shodhganga()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/sub_swayam.png",
-                    text: "Swayam",
+                  Text(
+                    "Shodhganga",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ), 
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Shodhganga()),
+                        );
+                      },
+                      child: Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_swayam.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3),
-            child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const OpenSourceDigital()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/c_library.png",
-                    text: "Open Source digital\n            library",
+                  Text(
+                    "Swayam",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ), 
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OpenSourceDigital()),
+                        );
+                      },
+                      child:Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/c_library.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NationalDigitalLabrary()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/sub_nationalhealth.png",
-                    text: "National Digital Labrary",
+                  Text(
+                    "Open Source digital\n            library",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),  
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NationalDigitalLabrary()),
+                        );
+                      },
+                      child:Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_nationalhealth.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3),
-            child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const NationalDigitalLabrary()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/sub_educationhealth.png",
-                    text: "Education For Health",
+                  Text(
+                    "National Digital Labrary",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),  
+                    ),
+                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NationalDigitalLabrary()),
+                        );
+                      },
+                      child:Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/sub_educationhealth.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MuhsHealth()),
-                    );
-                  },
-                  child: DigitalLibrarys(
-                    images: "assets/images/logo.png",
-                    text: "MUHS HEALTH\n SCIENCES REVIEW",
+                  Text(
+                    "Education For Health",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),   
+                     ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MuhsHealth()),
+                        );
+                      },
+                      child:Container(
+              height: 130,
+              width: 175,
+              color: HexColor('#074372'),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      height: 60,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                  Text(
+                    "MUHS HEALTH\n SCIENCES REVIEW",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ),  )
+
+          ],
+         
+        ),
       ),
     );
   }
 }
 
-class DigitalLibrarys extends StatelessWidget {
-  final String text;
-  final String images;
-  const DigitalLibrarys({
-    Key? key,
-    required this.text,
-    required this.images,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(1.0),
-          child: Container(
-            height: 130,
-            width: 175,
-            color: HexColor('#074372'),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    images,
-                    height: 60,
-                  ),
-                ),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
