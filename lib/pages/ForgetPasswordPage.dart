@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class ForgetPassworld extends StatelessWidget {
+class ForgetPassworld extends StatefulWidget {
   const ForgetPassworld({super.key});
 
+  @override
+  State<ForgetPassworld> createState() => _ForgetPassworldState();
+}
+
+class _ForgetPassworldState extends State<ForgetPassworld> { 
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(

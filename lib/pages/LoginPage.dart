@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
     String? val = await prf.getString("Login");
     if (val!.isNotEmpty && val != null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => WelcomePage()),
+          MaterialPageRoute(builder: (context) => MuhsHomePage()),
           (route) => false);
     }
   }
@@ -311,13 +311,18 @@ class _LoginPageState extends State<LoginPage> {
                               )
                             ],
                           )
-                        : Text(
-                            "Login",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold),
+                        : Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: Center(
+                            child: Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
                           ),
+                        ),
                   ),
                 )
               ],
@@ -393,7 +398,7 @@ class _LoginPageState extends State<LoginPage> {
      pref.setString("collageId", collageid);
 
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => WelcomePage()),
+        MaterialPageRoute(builder: (context) => MuhsHomePage()),
         (route) => false);
   }
 }

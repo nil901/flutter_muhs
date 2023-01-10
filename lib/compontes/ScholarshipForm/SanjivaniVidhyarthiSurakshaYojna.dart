@@ -281,7 +281,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                 child: Row(
                   children: [
                     Text(
-                        "विद्यार्थ्याचा प्राणघातक अपघात झाला किंवा अपघातात अपंगत्व\n आल्यास किंवा अपघातात/नैसर्गिक/गंभीर आजाराने मृत पावल्यास/\n आजारी असल्यास प्रस्तावासोबत क्लेम फॉर्म जोडावा.")
+                        "विद्यार्थ्याचा प्राणघातक अपघात झाला किंवा अपघातात अपंगत्व\n आल्यास किंवा अपघातात/नैसर्गिक/गंभीर आजाराने मृत \nपावल्यास/ आजारीअसल्यास प्रस्तावासोबत क्लेम फॉर्म जोडावा.")
                   ],
                 ),
               ),
@@ -1224,7 +1224,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                   ),
                   Container(
                     height: 40,
-                    width: 300,
+                    width: 250,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(
@@ -1269,7 +1269,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                   ),
                   Container(
                     height: 40,
-                    width: 300,
+                    width: 250,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
@@ -1567,7 +1567,6 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                           hintText: '',
                           hintStyle:
                               TextStyle(color: Colors.black26, fontSize: 16),
-                       
                         ),
                         validator: MultiValidator([
                           RequiredValidator(errorText: "Required *"),
@@ -1935,28 +1934,28 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                     child: InkWell(
                   onTap: datetiming,
                   child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: HexColor('#074372'),
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: HexColor('#074372'),
+                        ),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: 20,
                           ),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: 20,
-                              ),
-                              dateTiming == null
-                                  ? Text("")
-                                  : Text("$datetimeBackandDevloper"),
-                              Icon(Icons.calendar_month),
-                            ],
-                          ),
-                          ),
-                          ),
+                          dateTiming == null
+                              ? Text("")
+                              : Text("$datetimeBackandDevloper"),
+                          Icon(Icons.calendar_month),
+                        ],
+                      ),
+                    ),
+                  ),
                 )),
               ),
               SizedBox(
@@ -2165,8 +2164,7 @@ class _SanjivaniVidhyarthiSurakshaYojnaState
                     if (_fromkey.currentState!.validate()) {
                       sanjivaniVidhyarthiSurakshaYojna();
                       Get.to(GrievanceRedressal());
-                    } else { 
-            
+                    } else {
                       print("not submitted");
                     }
                   },

@@ -71,10 +71,21 @@ class _RegistrationState extends State<Registration> {
           "LANG_ID": ""
         }));
     print(response.body);
-    if (response.statusCode == 200) {
+     var jsonResponse = json.decode(response.body);
+    if (jsonResponse['ResponseCode'] == "0") {
       setState(() {
         mapresponse = json.decode(response.body);
         listresponse = mapresponse["DATA"];
+         Fluttertoast.showToast(
+            msg: "valid prn number",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black54,
+            textColor: Colors.white,
+            fontSize: 13.0,
+          );
+     
         if (listresponse![0]['PASSWORD'].length > 0) {
           Get.to(LoginPage());
           Fluttertoast.showToast(
@@ -125,13 +136,7 @@ class _RegistrationState extends State<Registration> {
     }
   }
 
-  String validateMobile(String value) {
-// Indian Mobile number are of 10 digit only
-    if (value.length != 13)
-      return 'Mobile Number must be of 10 digit';
-    else
-      return 'null';
-  }
+  
 
   ShowImage(String image) {
     return Padding(
@@ -400,7 +405,25 @@ class _RegistrationState extends State<Registration> {
                   onTap: (() {
                     apicall();
                   }),
-                  child: Container(
+                  child:_isLoading ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 24,
+                              ),
+                              Text(
+                                "Please Wait...",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          ) : Container(
                     height: 45,
                     width: 100,
                     decoration: BoxDecoration(

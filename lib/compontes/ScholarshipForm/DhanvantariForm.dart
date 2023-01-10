@@ -281,7 +281,7 @@ class _DhanvantariYojnaState extends State<DhanvantariYojna> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                height: 1540,
+                height: 1580,
                 padding: EdgeInsets.all(8.0),
                 child: Table(
                   columnWidths: {

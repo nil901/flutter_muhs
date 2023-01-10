@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:http/http.dart' as http;
 
+import 'PDF/pdfView.dart';
+
 class AntiRagging extends StatefulWidget {
   const AntiRagging({super.key});
 
@@ -73,24 +75,35 @@ class _AntiRaggingState extends State<AntiRagging> {
                   crossAxisSpacing: 3,
                   mainAxisSpacing: 3),
               itemBuilder: (context, index) {
-                return Container(
-                  color: HexColor('#074372'),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/pdf.png",
-                        height: 50,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        listresponse![index]["ART_TITLE"].toString(),
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      )
-                    ],
+                return InkWell( 
+                   onTap: (() {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return PdfView(
+                                  name: listresponse![index]["ART_TITLE"].toString(),
+                                  pathPDF: listresponse![index]["ARP_URL"].toString(),
+                                );
+                              }));
+                            }),
+                  child: Container(
+                    color: HexColor('#074372'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/pdf.png",
+                          height: 50,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          listresponse![index]["ART_TITLE"].toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

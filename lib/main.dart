@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_muhs/demo/marathi_Froms.dart';
+import 'package:flutter_muhs/pages/DrawerForms/AppliedForm.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => SplashScreen(),
+        "/": (context) => AppliedForms(),
       },
     );
   }

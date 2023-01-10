@@ -832,7 +832,7 @@ class _EarnWhileLearnState extends State<EarnWhileLearn> {
                       ),
                       Container(
                         height: 40,
-                        width: 310,
+                        width: 250,
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: HexColor('#074372'),
@@ -880,7 +880,7 @@ class _EarnWhileLearnState extends State<EarnWhileLearn> {
                       ),
                       Container(
                         height: 40,
-                        width: 310,
+                        width: 250,
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: HexColor('#074372'),
@@ -928,7 +928,7 @@ class _EarnWhileLearnState extends State<EarnWhileLearn> {
                       ),
                       Container(
                         height: 40,
-                        width: 310,
+                        width: 250,
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: HexColor('#074372'),
@@ -1066,7 +1066,7 @@ class _EarnWhileLearnState extends State<EarnWhileLearn> {
                       ),
                       Container(
                         height: 40,
-                        width: 310,
+                        width: 250,
                         decoration: BoxDecoration(
                             border: Border.all(
                               color: HexColor('#074372'),
@@ -1611,9 +1611,7 @@ class _EarnWhileLearnState extends State<EarnWhileLearn> {
                   onTap: () {
                     if (_fromkey.currentState!.validate()) {
                       earnWhileLearn();
-                      setState(() {
-                       
-                      });
+                      setState(() {});
                     } else {
                       print("not submitted");
                     }

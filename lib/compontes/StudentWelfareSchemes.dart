@@ -137,7 +137,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                 },
                                 child: Container(
                                   height: 23,
-                                  width: 80,
+                                  width: 70,
                                   decoration: BoxDecoration(
                                       color: HexColor("#dbdbdb"),
                                       borderRadius: BorderRadius.circular(17)),
@@ -157,7 +157,8 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                             ),
                             if (listresponse![index]["SWT_TITLE"] ==
                                 ("Savitribai Phule Girls scholarship"))
-                              listresponse![index]["SWT_TITLE"] == ("Savitribai Phule Girls scholarship")
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Savitribai Phule Girls scholarship")
                                   ? InkWell(
                                       onTap: (() {
                                         Get.to(
@@ -165,7 +166,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                       }),
                                       child: Container(
                                         height: 23,
-                                        width: 80,
+                                        width: 70,
                                         decoration: BoxDecoration(
                                             color: HexColor('#074372'),
                                             borderRadius:
@@ -192,7 +193,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                       },
                                       child: Container(
                                         height: 23,
-                                        width: 80,
+                                        width: 70,
                                         decoration: BoxDecoration(
                                             color: HexColor('#074372'),
                                             borderRadius:
@@ -210,13 +211,16 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                     )
                                   : null!,
                             if (listresponse![index]["SWT_TITLE"] ==
-                                ("Dhanvantari Yojana")) listresponse![index]["SWT_TITLE"] == ("Dhanvantari Yojana") ? InkWell(
+                                ("Dhanvantari Yojana"))
+                              listresponse![index]["SWT_TITLE"] ==
+                                      ("Dhanvantari Yojana")
+                                  ? InkWell(
                                       onTap: (() {
                                         Get.to(DhanvantariYojna());
                                       }),
                                       child: Container(
                                         height: 23,
-                                        width: 80,
+                                        width: 70,
                                         decoration: BoxDecoration(
                                             color: HexColor('#074372'),
                                             borderRadius:
@@ -233,7 +237,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                       ),
                                     )
                                   : null!,
-                               if (listresponse![index]["SWT_TITLE"] ==
+                            if (listresponse![index]["SWT_TITLE"] ==
                                 ("Sanjivani Vidhyarthi Suraksha Yojana"))
                               listresponse![index]["SWT_TITLE"] ==
                                       ("Sanjivani Vidhyarthi Suraksha Yojana")
@@ -244,7 +248,7 @@ class _StudentWelfareSchemesState extends State<StudentWelfareSchemes> {
                                       },
                                       child: Container(
                                         height: 23,
-                                        width: 80,
+                                        width: 70,
                                         decoration: BoxDecoration(
                                             color: HexColor('#074372'),
                                             borderRadius:
