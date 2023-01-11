@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_muhs/demo/WelcomePage.dart';
 import 'package:flutter_muhs/demo/marathi_Froms.dart';
 import 'package:flutter_muhs/pages/DrawerForms/AppliedForm.dart';
 import 'package:flutter_muhs/pages/LoginPage.dart';
 import 'package:flutter_muhs/pages/MuhsHomePage.dart';
+import 'package:flutter_muhs/pages/MyProfile.dart';
 import 'package:flutter_muhs/pages/SplashScreen.dart';
 import 'package:flutter_muhs/pages/StudentRegistration.dart';
+import 'package:flutter_muhs/widgets/DrawerWidgets/MyProfile.dart';
 import 'package:get/get.dart';
 import 'compontes/ScholarshipForm/DhanvantariForm.dart';
 import 'compontes/ScholarshipForm/EarnWhilelearn.dart';
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        "/": (context) => AppliedForms(),
+        "/": (context) => MyProfile2(),
       },
     );
   }

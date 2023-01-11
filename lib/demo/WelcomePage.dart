@@ -14,6 +14,7 @@ class _WelcomePageState extends State<WelcomePage> {
   String? prnnumber = "";
   String? email = "";
   String? collageid = "";
+   String? firstName = "";
   @override
   void initState() {
     getCard();
@@ -27,7 +28,8 @@ class _WelcomePageState extends State<WelcomePage> {
       token = shef.getString("Login");
       prnnumber = shef.getString("PRN");
       email = shef.getString("email");
-   collageid=   shef.getString("collageId");
+      collageid=   shef.getString("collageId");
+      firstName =  shef.getString("name");
     });
   }
 
@@ -48,17 +50,18 @@ class _WelcomePageState extends State<WelcomePage> {
                 SizedBox(
                   height: 15,
                 ),
-                Text("Your id prn :${prnnumber}"),
-                Text("Your id prn :${email}"),
-                  Text("Your id prn :${collageid}"),
-                ElevatedButton(
+                 Text("Your id prn :${prnnumber}"),
+                 Text("Your id prn :${email}"),
+                 Text("Your id prn :${collageid}"),
+                 Text("Your id name :${firstName}"),
+                 ElevatedButton(
                     onPressed: () async {
                       SharedPreferences prf =
-                          await SharedPreferences.getInstance();
+                      await SharedPreferences.getInstance();
                       await prf.clear();
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => LoginPage()),
-                          (route) => false);
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => false);
                     },
                     child: Text("Logout"))
               ],

@@ -71,7 +71,26 @@ class _LoginPageState extends State<LoginPage> {
           listresponse![0]['PRN_NUMBER'].toString(),
           listresponse![0]['STUDENT_ID'].toString(),
           listresponse![0]['EMAIL_ID'].toString(),
-          listresponse![0]['COLLAGE_ID'].toString());
+          listresponse![0]['COLLAGE_ID'].toString(),
+          listresponse![0]['FIRST_NAME'].toString(),
+          listresponse![0]['MIDDEL_NAME'].toString(),
+          listresponse![0]['LAST_NAME'].toString() ,
+          listresponse![0]['DOB'].toString() , 
+          listresponse![0]['MOBILE_NUMBER'].toString() , 
+          listresponse![0]['COLLAGE_NAME'].toString() , 
+          listresponse![0]['FACULTY'].toString() ,
+          listresponse![0]['BATCH_YEAR'].toString() ,
+          listresponse![0]['PROFILE_PHOTO'].toString() ,
+          listresponse![0]['ADDRESS'].toString() ,
+          listresponse![0]['PASSWORD'].toString() ,
+
+
+               
+               
+
+
+            
+            );
 
       // ignore: use_build_context_synchronously
         Fluttertoast.showToast(
@@ -390,12 +409,32 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void pageRoute(String token, prf, String email ,String collageid) async {
+  void pageRoute(String token, prf, String email ,String collageid , String name,String middle ,String lastname ,String dob ,String mobilenumber ,String collagename ,String faculty ,String year ,String image , String address ,String passworld) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString("Login", token);
     pref.setString("PRN", prf);
     pref.setString("email", email);
-     pref.setString("collageId", collageid);
+    pref.setString("collageId", collageid);
+    pref.setString("name", name);
+    pref.setString("lastname", lastname);
+    pref.setString("middle", middle);
+    pref.setString("dob", dob);  
+    pref.setString("mobilenumber", mobilenumber);  
+    pref.setString("collagename", collagename);     
+    pref.setString("faculty", faculty);   
+    pref.setString("year", year);  
+    pref.setString("year", year); 
+    pref.setString("image", image); 
+    pref.setString("address", address); 
+    pref.setString("Passworld", passworld);   
+    
+
+
+
+
+       
+
+
 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => MuhsHomePage()),

@@ -127,7 +127,7 @@ class _RegistrationState extends State<Registration> {
       final imageTemporary = File(image.path);
       imageData = base64Encode(imageTemporary.readAsBytesSync());
 
-      print( " image path nilesh  " + imageData);
+   
 
       setState(() {});
       this.image = imageTemporary;
@@ -200,7 +200,7 @@ class _RegistrationState extends State<Registration> {
         _isLoading = true;
       });
     } else {
-      print("error");
+  
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
